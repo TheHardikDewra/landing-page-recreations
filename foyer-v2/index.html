@@ -229,6 +229,9 @@
   .below .city:hover { color: #1d4ed8; }
   .events { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
   .ev img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; display: block; background: #ececec; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  .ev img { filter: grayscale(1); transition: filter .4s ease, transform .4s ease; }
+  .ev:hover img { filter: grayscale(0); transform: translateY(-3px); }
+  @media (hover: none) { .ev img { filter: none; } }
   .ev b { display: block; margin-top: 10px; font-size: 14px; font-weight: 600; line-height: 1.3; letter-spacing: -.005em; }
   .ev span { display: block; margin-top: 4px; font-size: 13px; color: var(--gray); }
   .comms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -422,7 +425,8 @@
   }
   @media (max-width: 560px) {
     .sec { padding: 44px 20px; } .quotes { grid-template-columns: 1fr; } .wtile { width: 170px; }
-    .stats { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; gap: 10px; } .stat { padding: 14px 14px 16px; } .stat .n { font-size: 30px; margin-top: 12px; } .viz { height: 40px; } .viz.thumbs img { width: 28px; height: 28px; }
+    .note { transform: rotate(calc(var(--rot) * .4)); } .step { transform: rotate(calc(var(--rot) * .5)); }
   }
 </style>
 </head>

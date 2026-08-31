@@ -229,6 +229,9 @@
   .below .city:hover { color: #1d4ed8; }
   .events { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
   .ev img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; display: block; background: #ececec; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  .ev img { filter: grayscale(1); transition: filter .4s ease, transform .4s ease; }
+  .ev:hover img { filter: grayscale(0); transform: translateY(-3px); }
+  @media (hover: none) { .ev img { filter: none; } }
   .ev b { display: block; margin-top: 10px; font-size: 14px; font-weight: 600; line-height: 1.3; letter-spacing: -.005em; }
   .ev span { display: block; margin-top: 4px; font-size: 13px; color: var(--gray); }
   .comms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
