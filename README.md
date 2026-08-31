@@ -5,6 +5,7 @@ Three landing pages rebuilt section-for-section from sites whose structure I adm
 | Page | Reference | Concept |
 |---|---|---|
 | [`/foyer`](foyer/index.html) | luma.com | Foyer - a gatherings platform. Floating poster tiles around a rotating headline, one CTA, closing band, footer. |
+| [`/foyer-v2`](foyer-v2/index.html) | luma.com | Foyer v2 - the same structure rebuilt in the WDLP design system (navy / electric / paper, Clash Display + Geist Mono + Instrument Serif italics, 8px radius, GSAP reveals and parallax, navy closing container framing a product preview). Reuses `/foyer/img`. |
 | [`/maya-iyer`](maya-iyer/index.html) | arthurbrooks.com | Dr. Maya Iyer - a sleep scientist's personal brand. Hero carousel, testimonial carousel, quiz band, crisis-to-solution arc, podcast, books, speaking, partnerships, membership, signup footer. |
 | [`/harbor`](harbor/index.html) | calendly.com | Harbor - a client-ops SaaS for freelancers. Product tabs, four-step process, four accordion feature blocks, customer stories, integrations, get-started, marquee, footer. |
 
@@ -34,7 +35,8 @@ Product mockups, book covers, and the phone are built in CSS.
 ```
 index.html          hub
 assets/             hub thumbnails
-foyer/              page + img/tile-01..16.jpg
+foyer/              page + img/tile-01..16.jpg, community-1..6.jpg
+foyer-v2/           WDLP-system variation of Foyer (shares /foyer/img)
 maya-iyer/          page + img/hero-1..5, testimonial, portrait, podcast, speaking, partnership
 harbor/             page + img/story-1..5, marquee-1..4
 vercel.json         cleanUrls
