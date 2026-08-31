@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dr. Maya Iyer - The Science of Rest</title>
+<meta name="description" content="Dr. Maya Iyer is a sleep and longevity scientist and the bestselling author of The Rested Mind. Books, podcast, speaking, certification and membership.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Geist:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5F2EC;
+    --ink:#1a1a1a;
+    --green-deep:#123C30;
+    --green:#1F6F4F;
+    --sage:#DCE9DF;
+    --sage-text:#A9CDB8;
+    --sand:#E9E4D3;
+    --pale:#EFE9DD;
+    --line:#E3DED4;
+    --muted:#5b5b5b;
+    --serif:'Newsreader',Georgia,'Times New Roman',serif;
+    --sans:'Haffer','Geist','Inter',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;font-size:16px}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+  .serif{font-family:var(--serif)}
+  .label{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;font-weight:500;font-size:15px;padding:14px 26px;border-radius:999px;line-height:1;white-space:nowrap;transition:background .2s}
+  .btn:hover{background:#185a40}
+  .btn.white{background:#fff;color:var(--green)}
+  .btn.white:hover{background:#eef4ef}
+  .btn svg{width:16px;height:16px}
+  .circ{width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;transition:background .2s}
+  .circ:hover{background:var(--sage)}
+  .circ svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .dots{display:flex;gap:8px;align-items:center}
+  .dots span{width:8px;height:8px;border-radius:999px;background:#c9c4b8;transition:all .3s}
+  .dots span.on{width:22px;background:var(--ink)}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.12;letter-spacing:-.01em}
+  .h-xl{font-size:64px}
+  .h-lg{font-size:48px}
+  .h-md{font-size:40px}
+  .h-sm{font-size:32px}
+  p.lead{font-size:17px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .ph{background:#1b4a3c}
+  .sec{padding:112px 0}
+  .stack p + p{margin-top:14px}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:80px}
+  .brand{display:flex;align-items:center;gap:12px;font-size:24px;font-weight:500;letter-spacing:-.01em}
+  .brand .mark{width:36px;height:36px;border-radius:50%;background:var(--green);display:grid;place-items:center}
+  .brand .mark svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .links{display:flex;gap:26px;font-size:15px;font-weight:500}
+  .links a{display:inline-flex;align-items:center;gap:5px}
+  .links svg{width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .sub{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;padding:8px 8px 8px 22px;border-radius:999px;font-weight:500;font-size:16px}
+  .sub i{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center}
+  .sub i svg{width:14px;height:14px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .burger{display:none;width:40px;height:40px;place-items:center}
+  .burger svg{width:22px;height:22px;stroke:var(--ink);stroke-width:2;stroke-linecap:round}
+
+  /* HERO */
+  .hero{padding-top:64px}
+  .card{position:relative;background:var(--green-deep);border-radius:24px;overflow:hidden;height:648px}
+  .slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;pointer-events:none}
+  .slide.on{opacity:1;pointer-events:auto}
+  .slide img,.slide .ph{position:absolute;top:0;right:0;bottom:0;width:60%;height:100%;object-fit:cover;object-position:center}
+  .slide .copy{position:absolute;left:90px;top:50%;transform:translateY(-50%);max-width:430px;color:#fff;z-index:2}
+  .slide .copy h1{color:#fff;margin-bottom:26px}
+  .slide .copy p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.9);margin-bottom:34px}
+  .hero-ctl{display:flex;justify-content:space-between;align-items:center;padding:28px 8px 0}
+  .hero-ctl .btns{display:flex;gap:10px}
+
+  /* STATEMENT */
+  .statement{padding:104px 0 72px;text-align:center}
+  .statement h2{font-size:40px;color:var(--green-deep);max-width:760px;margin:0 auto;line-height:1.3}
+  .statement em{font-style:italic}
+
+  /* TESTIMONIAL */
+  .testi{padding:0 0 96px}
+  .testi .photo{aspect-ratio:3/2;border-radius:16px;overflow:hidden}
+  .testi .photo img{width:100%;height:100%;object-fit:cover}
+  .testi .side{display:flex;flex-direction:column;min-height:400px}
+  .testi .btns{display:flex;gap:10px;margin-bottom:22px}
+  .testi .circ{width:36px;height:36px}
+  .testi .circ svg{width:15px;height:15px}
+  .testi blockquote{font-family:var(--serif);font-size:24px;line-height:1.45;color:var(--ink);max-width:460px;min-height:170px;transition:opacity .3s}
+  .testi .who{margin-top:auto;padding-top:28px}
+  .testi .who b{display:block;font-weight:600;font-size:15px}
+  .testi .who span{font-family:var(--serif);color:var(--green);font-size:16px}
+
+  /* QUIZ BAND */
+  .bandwrap{position:relative;z-index:3}
+  .band{background:var(--green);color:#fff;border-radius:20px;padding:44px 56px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+  .band h3{font-size:30px;color:#fff;margin-bottom:8px}
+  .band p{font-size:15px;color:rgba(255,255,255,.88);max-width:560px}
+
+  /* CRISIS */
+  .crisis{background:var(--sage);margin-top:-52px;padding:132px 0 0}
+  .crisis h2{text-align:center;color:var(--green-deep);margin-bottom:72px}
+  .cols{display:grid;grid-template-columns:1fr 1fr 1fr}
+  .col{padding:8px 44px;text-align:center;font-size:15px;line-height:1.55;color:#2b2b2b}
+  .col + .col{border-left:1px solid #b7cbbe}
+  .col svg{display:block;width:44px;height:44px;stroke:var(--green);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 22px}
+  .good{background:var(--green-deep);border-radius:20px;padding:64px 80px;text-align:center;margin-top:88px;position:relative;z-index:2;transform:translateY(120px)}
+  .good h3{font-size:36px;color:var(--sage-text);margin-bottom:22px;line-height:1.25}
+  .good p{color:rgba(255,255,255,.9);font-size:17px;max-width:720px;margin:0 auto;line-height:1.6}
+
+  /* ABOUT */
+  .about{background:#161616;color:#fff;position:relative;overflow:hidden;padding:220px 0 96px}
+  .about .wrap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:flex-start}
+  .about h2{font-size:44px;color:#fff;margin-bottom:34px;line-height:1.15}
+  .about em{font-style:italic}
+  .about p{font-size:15px;line-height:1.65;color:rgba(255,255,255,.82);max-width:480px}
+  .about .btn{margin-top:38px}
+  .about .pic{position:absolute;right:0;top:-220px;bottom:0;width:44%;pointer-events:none}
+  .about .pic img,.about .pic .ph{width:100%;height:100%;object-fit:cover;object-position:top center}
+  .about .pic .ph{background:#242424}
+
+  /* PODCAST */
+  .pod .thumb{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#2a2a2a}
+  .pod .thumb img{width:100%;height:100%;object-fit:cover}
+  .pod .thumb .veil{position:absolute;inset:0;background:rgba(0,0,0,.28)}
+  .pod .thumb .txt{position:absolute;right:36px;top:50%;transform:translateY(-50%);text-align:right;color:#fff}
+  .pod .thumb .txt b{display:block;font-family:var(--sans);font-weight:700;font-size:54px;line-height:.98;letter-spacing:-.02em}
+  .pod .thumb .txt small{display:block;margin-top:14px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;opacity:.9}
+  .pod .thumb .tag{position:absolute;left:18px;top:18px;width:36px;height:36px;border-radius:8px;background:#111;display:grid;place-items:center;font-size:9px;font-weight:700;color:#fff;letter-spacing:.06em;text-align:center;line-height:1.1}
+  .pod h3{font-size:36px;margin:12px 0 18px;line-height:1.15}
+  .pod p{font-size:15px;line-height:1.6;color:#333;max-width:520px;margin-bottom:28px}
+
+  /* BOOK COVER */
+  .cover{position:relative;width:260px;height:390px;background:#F3EDE0;border:1px solid #d9d2c2;box-shadow:0 14px 28px rgba(0,0,0,.14);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:26px 22px;text-align:center;flex:none}
+  .cover:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:#e2dccb;border-right:1px solid #cfc7b3}
+  .cover .kicker{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#6b6b6b;max-width:180px;line-height:1.5}
+  .cover .rings{width:150px;height:150px;position:relative}
+  .cover .rings i{position:absolute;inset:0;border:1px solid #1a1a1a;border-radius:50%}
+  .cover .rings i:nth-child(2){inset:14px}
+  .cover .rings i:nth-child(3){inset:28px}
+  .cover .rings i:nth-child(4){inset:42px}
+  .cover .rings i:nth-child(5){inset:56px}
+  .cover .rings i:nth-child(6){inset:70px;background:#1a1a1a}
+  .cover .ttl{font-family:var(--serif);font-size:30px;line-height:1.05;letter-spacing:.06em;text-transform:uppercase;color:#1a1a1a}
+  .cover .ttl small{display:block;font-size:14px;letter-spacing:.3em;margin:2px 0}
+  .cover .auth{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
+  .cover .auth small{display:block;font-size:7px;letter-spacing:.12em;color:#6b6b6b;margin-bottom:6px;font-weight:500}
+  .cover.alt{background:#1F3A2E;border-color:#1a3128;color:#fff}
+  .cover.alt:before{background:#183025;border-right-color:#122419}
+  .cover.alt .kicker{color:rgba(255,255,255,.7)}
+  .cover.alt .rings i{border-color:#A9CDB8}
+  .cover.alt .rings i:nth-child(6){background:#A9CDB8}
+  .cover.alt .ttl{color:#fff}
+  .cover.alt .auth{color:#fff}
+  .cover.alt .auth small{color:rgba(255,255,255,.7)}
+  .cover.sm{transform:scale(.78);transform-origin:center}
+
+  /* LATEST BOOK */
+  .latest .cardpale{background:var(--pale);border-radius:16px;min-height:520px;display:grid;place-items:center;padding:60px}
+  .latest h3{font-size:44px;margin:12px 0 20px;line-height:1.1}
+  .latest p{font-size:15px;line-height:1.6;color:#333;max-width:440px;margin-bottom:30px}
+  .latest .btn svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .latest .grid2{grid-template-columns:1fr 1.15fr}
+
+  /* SPEAKING / PARTNERS */
+  .feat .pic{aspect-ratio:3/4;border-radius:16px;overflow:hidden}
+  .feat .pic.wide{aspect-ratio:4/3}
+  .feat .pic img{width:100%;height:100%;object-fit:cover}
+  .feat .pic.bw img{filter:grayscale(1)}
+  .feat h3{font-size:44px;margin:12px 0 22px;line-height:1.12}
+  .feat p{font-size:15px;line-height:1.6;color:#333;max-width:470px}
+  .feat .btn{margin-top:32px}
+  .feat .grid2{align-items:center}
+  .feat.partners .grid2{grid-template-columns:.9fr 1.1fr}
+
+  /* BOOKS */
+  .books{background:#EDEAE3;padding:96px 0}
+  .books .label{display:block;text-align:center;margin-bottom:18px}
+  .books h2{text-align:center;color:var(--green-deep);max-width:800px;margin:0 auto 56px;font-size:40px;line-height:1.25}
+  .bookgrid{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1160px;margin:0 auto}
+  .bk{text-align:center}
+  .bk .tile{border-radius:16px;height:400px;display:grid;place-items:center;overflow:hidden}
+  .bk .tile.sage{background:var(--sage)}
+  .bk .tile.sand{background:var(--sand)}
+  .bk .label{margin:26px 0 8px}
+  .bk h4{font-family:var(--serif);font-weight:400;font-size:24px}
+  .books .more{text-align:center;margin-top:44px}
+
+  /* MEMBERSHIP */
+  .member{background:#EDEAE3;padding:0 0 96px}
+  .member .card2{background:var(--sage);border-radius:20px;overflow:hidden;position:relative;display:grid;grid-template-columns:1fr 340px;gap:40px;padding:64px 80px 0;min-height:400px}
+  .member h3{font-size:40px;line-height:1.15;color:var(--ink);margin-bottom:20px;max-width:640px}
+  .member p{font-size:15px;line-height:1.6;color:#333;max-width:560px;margin-bottom:28px}
+  .member .lft{padding-bottom:64px}
+  .phone{width:250px;height:470px;border:10px solid #111;border-radius:40px;background:#fff;position:relative;justify-self:center;align-self:end;margin-bottom:-90px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.18)}
+  .phone .notch{position:absolute;left:50%;top:0;transform:translateX(-50%);width:110px;height:26px;background:#111;border-radius:0 0 16px 16px}
+  .phone .top{padding:44px 16px 10px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px}
+  .phone .av{width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:600}
+  .phone .top b{display:block;font-size:13px;font-weight:600}
+  .phone .top small{display:block;font-size:10px;color:#888}
+  .phone .chat{padding:14px 12px;display:flex;flex-direction:column;gap:10px}
+  .bub{max-width:82%;font-size:11.5px;line-height:1.4;padding:9px 11px;border-radius:14px;background:#F0EEE8;color:#222}
+  .bub.me{align-self:flex-end;background:var(--green);color:#fff;border-bottom-right-radius:4px}
+  .bub.ai{border-bottom-left-radius:4px}
+  .phone .inp{position:absolute;left:12px;right:12px;bottom:14px;height:34px;border:1px solid #ddd;border-radius:999px;font-size:11px;color:#999;display:flex;align-items:center;padding:0 12px}
+
+  /* FOOTER */
+  footer{background:var(--green-deep);color:#fff;padding:80px 0 40px}
+  .ftop{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.18)}
+  .ftop h3{font-size:34px;color:var(--sage-text);line-height:1.2;margin-bottom:12px;max-width:420px}
+  .ftop p{font-size:14px;color:rgba(255,255,255,.8)}
+  .form{display:flex;flex-direction:column;gap:12px}
+  .form .row{position:relative}
+  .form input{width:100%;height:50px;border-radius:999px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;padding:0 20px;font:inherit;font-size:14px;outline:none}
+  .form input::placeholder{color:rgba(255,255,255,.75)}
+  .form .go{position:absolute;right:5px;top:5px;height:40px;padding:0 20px;border-radius:999px;background:#fff;color:var(--green-deep);font-weight:600;font-size:14px}
+  .fcols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding:56px 0 64px;border-bottom:1px solid rgba(255,255,255,.18)}
+  .fcols h4{font-family:var(--serif);font-weight:400;font-size:22px;color:var(--sage-text);margin-bottom:22px}
+  .fcols a{display:block;font-size:13px;color:rgba(255,255,255,.78);margin-bottom:12px}
+  .fcols a:hover{color:#fff}
+  .fbot{display:flex;align-items:center;justify-content:space-between;padding-top:28px;font-size:12px;color:rgba(255,255,255,.75);gap:24px;flex-wrap:wrap}
+  .fbot .lk{display:flex;gap:22px;flex-wrap:wrap}
+  .mi{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:22px;color:#fff}
+  .mi i{display:block;width:56px;height:2px;background:var(--sage-text)}
+
+  /* RESPONSIVE */
+  @media (max-width:1100px){
+    .h-xl{font-size:52px}
+    .slide .copy{left:56px}
+    .about .pic{width:40%}
+  }
+  @media (max-width:900px){
+    .wrap{padding:0 20px}
+    .links,.sub{display:none}
+    .burger{display:grid}
+    .nav .wrap{height:68px}
+    .brand{font-size:20px}
+    .hero{padding-top:24px}
+    .card{height:auto}
+    .slide{position:relative;display:none;opacity:1}
+    .slide.on{display:block}
+    .slide .copy{position:static;transform:none;padding:44px 28px 36px;max-width:none}
+    .slide .copy h1{font-size:40px}
+    .slide img,.slide .ph{position:relative;width:100%;height:auto;aspect-ratio:3/2}
+    .hero-ctl{padding:20px 0 0}
+    .statement{padding:72px 0 48px}
+    .statement h2{font-size:30px}
+    .grid2,.about .wrap,.latest .grid2,.feat.partners .grid2{grid-template-columns:1fr;gap:32px}
+    .testi .side{min-height:0}
+    .testi blockquote{min-height:0;font-size:21px}
+    .testi .who{padding-top:22px}
+    .band{flex-direction:column;align-items:flex-start;padding:32px 28px}
+    .band h3{font-size:26px}
+    .crisis{margin-top:-40px;padding-top:110px}
+    .crisis h2{font-size:36px;margin-bottom:40px}
+    .cols{grid-template-columns:1fr}
+    .col{padding:24px 8px}
+    .col + .col{border-left:0;border-top:1px solid #b7cbbe}
+    .good{padding:44px 28px;transform:translateY(80px);margin-top:48px}
+    .good h3{font-size:28px}
+    .about{padding:140px 0 72px}
+    .about .pic{position:relative;width:100%;top:0;aspect-ratio:3/4;max-height:520px;order:-1;margin-top:-60px}
+    .about h2{font-size:34px}
+    .sec{padding:72px 0}
+    .pod .thumb .txt b{font-size:36px}
+    .pod h3,.latest h3,.feat h3{font-size:32px}
+    .latest .cardpale{min-height:0;padding:40px}
+    .books{padding:72px 0}
+    .books h2{font-size:30px}
+    .bookgrid{grid-template-columns:1fr}
+    .bk .tile{height:380px}
+    .member .card2{grid-template-columns:1fr;padding:40px 28px 0}
+    .member h3{font-size:30px}
+    .member .lft{padding-bottom:12px}
+    .phone{margin-bottom:-120px}
+    footer{padding:64px 0 32px}
+    .ftop{grid-template-columns:1fr;gap:32px}
+    .ftop h3{font-size:28px}
+    .fcols{grid-template-columns:1fr 1fr;gap:28px}
+    .fbot{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg>
+      </span>
+      Maya Iyer
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="#">Learn <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Topics <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Work with Maya <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">About <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Books <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Membership</a>
+      <a href="#">Retreats</a>
+    </nav>
+    <a class="sub" href="#signup">Subscribe <i><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></i></a>
+    <button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<!-- HERO CAROUSEL -->
+<section class="hero">
+  <div class="wrap">
+    <div class="card" id="hero">
+      <div class="slide on">
+        <div class="copy">
+          <h1 class="h-xl">Help others rest better</h1>
+          <p>The Rested Mind Certification trains you to take the sleep science Maya has spent 20 years developing and use it with the people you already serve - patients, a team, athletes, or your own family.</p>
+          <a class="btn" href="#">Learn More</a>
+        </div>
+        <img src="img/hero-1.jpg" width="2048" height="1365" alt="Dr. Maya Iyer seated in her home library" class="ph" onerror="this.removeAttribute('src')">
+      </div>
+      <div class="slide">
+        <div class="copy">
+          <h1 class="h-xl">Sleep like you mean it</h1>
+          <p>Five days in Rishikesh, 12-16 November 2026. Small group, morning labs, evening walks, and a personal rest protocol you take home.</p>
+          <a class="btn" href="#">Reserve a Seat</a>
+        </div>
+        <img src="img/hero-2.jpg" width="2048" height="1365" alt="Maya on a terrace at dawn" class="ph" onerror="this.removeAttribute('src')">
+      </div>
+      <div class="slide">
+        <div class="copy">
+          <h1 class="h-xl">The Rested Mind is here</h1>
+          <p>The new book on why rest, not willpower, decides how long and how well you live. Out now in hardcover, ebook and audio.</p>
+          <a class="btn" href="#">Order Now</a>
+        </div>
+        <img src="img/hero-3.jpg" width="2048" height="1365" alt="Maya holding her new book" class="ph" onerror="this.removeAttribute('src')">
+      </div>
+      <div class="slide">
+        <div class="copy">
+          <h1 class="h-xl">Bring rest to your team</h1>
+          <p>Half-day workshops for leadership teams who run on four hours and wonder why decisions get worse after lunch.</p>
+          <a class="btn" href="#">Book a Workshop</a>
+        </div>
+        <img src="img/hero-4.jpg" width="2048" height="1365" alt="Maya leading a workshop" class="ph" onerror="this.removeAttribute('src')">
+      </div>
+      <div class="slide">
+        <div class="copy">
+          <h1 class="h-xl">Find your chronotype in 3 minutes</h1>
+          <p>Lark, owl, or somewhere in between - the free quiz tells you when your body wants to sleep, and what to do about it.</p>
+          <a class="btn" href="#">Take the Quiz</a>
+        </div>
+        <img src="img/hero-5.jpg" width="2048" height="1365" alt="Maya at her desk" class="ph" onerror="this.removeAttribute('src')">
+      </div>
+    </div>
+    <div class="hero-ctl">
+      <div class="dots" id="heroDots"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+      <div class="btns">
+        <button class="circ" id="heroPrev" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7"/></svg></button>
+        <button class="circ" id="heroNext" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="wrap">
+    <h2>#1 bestselling author, Dr. Maya Iyer is here to help you build <em>a deeper, more rested life</em></h2>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testi">
+  <div class="wrap grid2">
+    <div class="photo ph">
+      <img src="img/testimonial.jpg" width="2048" height="1365" alt="Maya with a reader holding The Rested Mind" onerror="this.style.display='none'">
+    </div>
+    <div class="side">
+      <div class="btns">
+        <button class="circ" id="tPrev" aria-label="Previous quote"><svg viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7"/></svg></button>
+        <button class="circ" id="tNext" aria-label="Next quote"><svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+      </div>
+      <blockquote id="tQuote">"Since following Maya's protocol I fall asleep in ten minutes. I did not know this was possible for me."</blockquote>
+      <div class="who">
+        <b id="tName">Priya Nair</b>
+        <span id="tRole">Founder, Lumen Health</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ BAND -->
+<section class="bandwrap">
+  <div class="wrap">
+    <div class="band">
+      <div>
+        <h3>Do you know your chronotype?</h3>
+        <p>Find out if you're wired as a lark, an owl, or somewhere in between. Knowing this is the first step to sleeping like you mean it.</p>
+      </div>
+      <a class="btn white" href="#">Take the Quiz and Find Out</a>
+    </div>
+  </div>
+</section>
+
+<!-- CRISIS -->
+<section class="crisis">
+  <div class="wrap">
+    <h2 class="h-lg">We're in a sleep crisis</h2>
+    <div class="cols">
+      <div class="col">
+        <svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/><path d="M17 3v4M15 5h4"/></svg>
+        Roughly one in three adults sleeps under seven hours a night, and most of them have stopped noticing.
+      </div>
+      <div class="col">
+        <svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/><path d="M4 8v8M20 8v8"/></svg>
+        We're scrolling later, waking earlier, and treating rest as the thing we do once everything else is finished.
+      </div>
+      <div class="col">
+        <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>
+        The data is blunt: short sleep is now tied to heart disease, weight gain, anxiety and slower thinking.
+      </div>
+    </div>
+    <div class="good">
+      <h3>But here's the good news:<br>sleep is trainable.</h3>
+      <p>In the same way we learned to train strength and endurance, we can train rest - through timing, light, temperature and a handful of habits that compound.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="wrap">
+    <div class="stack">
+      <h2>Hi, I'm Maya Iyer and I'm proof that rest <em>can</em> be learned</h2>
+      <p>People are often surprised to hear this, but for most of my twenties I was a terrible sleeper.</p>
+      <p>Through residency I ran on five hours, three coffees and the belief that rest was something I would earn later. My blood pressure, my memory and my mood all disagreed.</p>
+      <p>Over the past two decades I've studied sleep and recovery at two universities, run a sleep lab, and written six books (and counting) on what actually moves the needle.</p>
+      <p>Beneath the credentials is someone who had to learn all of it the slow way - through data, mistakes, and a lot of early nights.</p>
+      <p>I want the same thing for you, minus the twenty years.</p>
+      <a class="btn" href="#">Read More</a>
+    </div>
+    <div class="pic">
+      <img src="img/portrait.jpg" width="1536" height="2048" alt="Portrait of Dr. Maya Iyer" class="ph" onerror="this.removeAttribute('src')">
+    </div>
+  </div>
+</section>
+
+<!-- PODCAST -->
+<section class="sec pod">
+  <div class="wrap grid2">
+    <div class="thumb">
+      <img src="img/podcast.jpg" width="2048" height="1152" alt="" onerror="this.style.display='none'">
+      <div class="veil"></div>
+      <div class="tag">THE<br>RESTED<br>MIND</div>
+      <div class="txt"><b>SLEEP<br>IS A<br>SKILL</b><small>- Maya Iyer</small></div>
+    </div>
+    <div>
+      <span class="label">The Rested Mind Podcast EP - 42</span>
+      <h3>Why Your Bedtime Matters More Than Your Wake Time</h3>
+      <p>In this episode I walk through what the research says about the two anchors of a good night - when you go down and when you get up - and why moving your bedtime by 40 minutes does more for recovery than any supplement I have tested.</p>
+      <a class="btn" href="#">Listen to the Episode</a>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST BOOK -->
+<section class="sec latest" style="padding-top:0">
+  <div class="wrap grid2">
+    <div>
+      <span class="label">Latest Book</span>
+      <h3>The Rested Mind</h3>
+      <p>From the bestselling author of <em>Deep Rest</em>, the definitive account of how the modern day quietly steals your recovery - and a plan to take it back, one night at a time.</p>
+      <a class="btn" href="#">Order Now <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+    </div>
+    <div class="cardpale">
+      <div class="cover">
+        <div class="kicker">Why rest, not willpower, decides how long you live</div>
+        <div class="rings"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="ttl">The<br><small>Rested</small>Mind</div>
+        <div class="auth"><small>Bestselling author of Deep Rest</small>Maya Iyer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKING -->
+<section class="sec feat" style="padding-top:0">
+  <div class="wrap grid2">
+    <div class="pic bw ph">
+      <img src="img/speaking.jpg" width="1536" height="2048" alt="Maya speaking on stage" onerror="this.style.display='none'">
+    </div>
+    <div>
+      <span class="label">Speaking</span>
+      <h3>Bring the science of rest to your stage - or your team</h3>
+      <div class="stack">
+        <p>Maya has delivered keynotes to Fortune 500 leadership teams, national sports federations, medical conferences and universities across four continents.</p>
+        <p>She pairs the latest research in sleep and circadian science with practical protocols, so audiences leave with something to try that same night.</p>
+      </div>
+      <a class="btn" href="#">Book Maya to Speak</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERSHIPS -->
+<section class="sec feat partners" style="padding-top:0">
+  <div class="wrap grid2">
+    <div>
+      <span class="label">Sports and Performance Partnerships</span>
+      <h3>Make recovery part of your program</h3>
+      <div class="stack">
+        <p>Athletes today are training harder than any generation before them. Most of them are recovering worse.</p>
+        <p>From team-wide sleep audits to our travel and jet-lag playbook, discover how your program can partner with Maya to turn rest into a measurable edge.</p>
+      </div>
+      <a class="btn" href="#">Learn More</a>
+    </div>
+    <div class="pic wide ph">
+      <img src="img/partnership.jpg" width="2048" height="1536" alt="Maya talking with athletes" onerror="this.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<!-- BOOKS -->
+<section class="books">
+  <div class="wrap">
+    <span class="label">Books</span>
+    <h2>A #1 bestselling author, Maya has written 6 books, translated into more than 20 languages</h2>
+    <div class="bookgrid">
+      <div class="bk">
+        <div class="tile sage">
+          <div class="cover alt sm">
+            <div class="kicker">The art and science of switching off</div>
+            <div class="rings"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="ttl">Deep<br>Rest</div>
+            <div class="auth"><small>with Dr. Lena Faber</small>Maya Iyer</div>
+          </div>
+        </div>
+        <span class="label">Co-authored with Dr. Lena Faber</span>
+        <h4>Deep Rest</h4>
+      </div>
+      <div class="bk">
+        <div class="tile sand">
+          <div class="cover sm">
+            <div class="kicker">Why rest, not willpower, decides how long you live</div>
+            <div class="rings"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="ttl">The<br><small>Rested</small>Mind</div>
+            <div class="auth"><small>Bestselling author of Deep Rest</small>Maya Iyer</div>
+          </div>
+        </div>
+        <span class="label">#1 Bestseller</span>
+        <h4>The Rested Mind</h4>
+      </div>
+    </div>
+    <div class="more"><a class="btn" href="#">Browse All Books</a></div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="member">
+  <div class="wrap">
+    <div class="card2">
+      <div class="lft">
+        <h3>Your invitation to a life of deeper rest and energy.</h3>
+        <p>Join Maya for a monthly live session backed by daily tools that turn the research into a routine you can keep.</p>
+        <a class="btn" href="#">Join Now <svg viewBox="0 0 24 24" style="stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <div class="notch"></div>
+        <div class="top"><span class="av">M</span><div><b>Ask Maya</b><small>Online now</small></div></div>
+        <div class="chat">
+          <div class="bub me">I wake at 3am most nights and can't get back down. Where do I start?</div>
+          <div class="bub ai">Start with your last light exposure. Tell me what your screen habits look like after 9pm and I'll build you a two-week plan.</div>
+          <div class="bub me">Phone in bed, usually until midnight.</div>
+          <div class="bub ai">That's the lever. Here's tonight's version...</div>
+        </div>
+        <div class="inp">Message Maya</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="signup">
+  <div class="wrap">
+    <div class="ftop">
+      <div>
+        <h3>Sign up to build a life of rest</h3>
+        <p>Get weekly, research-backed habits and one experiment to run each week, straight from Maya.</p>
+      </div>
+      <form class="form" onsubmit="return false">
+        <div class="row"><input type="text" placeholder="First Name" aria-label="First name"></div>
+        <div class="row"><input type="email" placeholder="Email Address" aria-label="Email address"><button class="go" type="submit">Sign up</button></div>
+      </form>
+    </div>
+    <div class="fcols">
+      <div>
+        <h4>Sitemap</h4>
+        <a href="#">Meet Maya</a><a href="#">Work with Maya</a><a href="#">Rested Mind Podcast</a><a href="#">Books</a><a href="#">Digital Products</a>
+      </div>
+      <div>
+        <h4>Work with Maya</h4>
+        <a href="#">Keynote Speaking</a><a href="#">Team Workshops</a><a href="#">Sports Programs</a><a href="#">Media Inquiries</a><a href="#">Retreats</a>
+      </div>
+      <div>
+        <h4>Topics</h4>
+        <a href="#">Sleep</a><a href="#">Recovery</a><a href="#">Energy</a><a href="#">Longevity</a><a href="#">Focus</a><a href="#">Aging</a><a href="#">Habits</a>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Podcast</a><a href="#">X</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <div class="lk">
+        <span>All rights reserved - © 2026 Maya Iyer</span>
+        <a href="#">Privacy Policy</a><a href="#">Accessibility</a><a href="#">Contact</a><a href="#">Site Credits</a>
+      </div>
+      <div class="mi"><span>M</span><i></i><span>I</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hero carousel
+  (function(){
+    var slides=[].slice.call(document.querySelectorAll('#hero .slide'));
+    var dots=[].slice.call(document.querySelectorAll('#heroDots span'));
+    var i=0,t;
+    function go(n){
+      slides[i].classList.remove('on');dots[i].classList.remove('on');
+      i=(n+slides.length)%slides.length;
+      slides[i].classList.add('on');dots[i].classList.add('on');
+    }
+    function auto(){clearInterval(t);t=setInterval(function(){go(i+1)},6000)}
+    document.getElementById('heroNext').addEventListener('click',function(){go(i+1);auto()});
+    document.getElementById('heroPrev').addEventListener('click',function(){go(i-1);auto()});
+    dots.forEach(function(d,k){d.addEventListener('click',function(){go(k);auto()})});
+    var card=document.getElementById('hero');
+    card.addEventListener('mouseenter',function(){clearInterval(t)});
+    card.addEventListener('mouseleave',auto);
+    auto();
+  })();
+
+  // Testimonials
+  (function(){
+    var q=[
+      ['"Since following Maya\'s protocol I fall asleep in ten minutes. I did not know this was possible for me."','Priya Nair','Founder, Lumen Health'],
+      ['"We changed nothing about training and our recovery scores went up across the squad. Only the sleep plan was new."','Tomas Ekström','Head Coach, Nordic Rowing'],
+      ['"Maya writes about rest the way a good clinician talks to a patient. Clear, honest, and without a single wasted word."','Dr. Lena Faber','Chief Medical Officer, Vireo Clinics'],
+      ['"I read The Rested Mind in two nights and slept better on the second one. Take from that what you will."','Marcus Bell','Author of Slow Work']
+    ];
+    var i=0,quote=document.getElementById('tQuote'),name=document.getElementById('tName'),role=document.getElementById('tRole');
+    function show(n){
+      i=(n+q.length)%q.length;
+      quote.style.opacity=0;name.style.opacity=0;role.style.opacity=0;
+      setTimeout(function(){
+        quote.textContent=q[i][0];name.textContent=q[i][1];role.textContent=q[i][2];
+        quote.style.opacity=1;name.style.opacity=1;role.style.opacity=1;
+      },250);
+    }
+    document.getElementById('tNext').addEventListener('click',function(){show(i+1)});
+    document.getElementById('tPrev').addEventListener('click',function(){show(i-1)});
+  })();
+</script>
+</body>
+</html>
