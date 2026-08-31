@@ -36,10 +36,10 @@
   .btn:hover{background:#185a40}
   .btn.white{background:#fff;color:var(--green)}
   .btn.white:hover{background:#eef4ef}
-  .btn svg{width:16px;height:16px}
+  .btn svg{width:16px;height:16px;fill:currentColor}
   .circ{width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;transition:background .2s}
   .circ:hover{background:var(--sage)}
-  .circ svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .circ svg{width:18px;height:18px;fill:var(--ink)}
   .dots{display:flex;gap:8px;align-items:center}
   .dots span{width:8px;height:8px;border-radius:999px;background:#c9c4b8;transition:all .3s}
   .dots span.on{width:22px;background:var(--ink)}
@@ -59,15 +59,15 @@
   .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:80px}
   .brand{display:flex;align-items:center;gap:12px;font-size:24px;font-weight:500;letter-spacing:-.01em}
   .brand .mark{width:36px;height:36px;border-radius:50%;background:var(--green);display:grid;place-items:center}
-  .brand .mark svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .brand .mark svg{width:16px;height:16px;fill:#fff}
   .links{display:flex;gap:26px;font-size:15px;font-weight:500}
   .links a{display:inline-flex;align-items:center;gap:5px}
-  .links svg{width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .links svg{width:14px;height:14px;fill:var(--ink)}
   .sub{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;padding:8px 8px 8px 22px;border-radius:999px;font-weight:500;font-size:16px}
   .sub i{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center}
-  .sub i svg{width:14px;height:14px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .sub i svg{width:14px;height:14px;fill:var(--green)}
   .burger{display:none;width:40px;height:40px;place-items:center}
-  .burger svg{width:22px;height:22px;stroke:var(--ink);stroke-width:2;stroke-linecap:round}
+  .burger svg{width:22px;height:22px;fill:var(--ink)}
 
   /* HERO */
   .hero{padding-top:64px}
@@ -93,7 +93,7 @@
   .testi .side{display:flex;flex-direction:column;min-height:400px}
   .testi .btns{display:flex;gap:10px;margin-bottom:22px}
   .testi .circ{width:36px;height:36px}
-  .testi .circ svg{width:15px;height:15px}
+  .testi .circ svg{width:16px;height:16px}
   .testi blockquote{font-family:var(--serif);font-size:24px;line-height:1.45;color:var(--ink);max-width:460px;min-height:170px;transition:opacity .3s}
   .testi .who{margin-top:auto;padding-top:28px}
   .testi .who b{display:block;font-weight:600;font-size:15px}
@@ -111,7 +111,7 @@
   .cols{display:grid;grid-template-columns:1fr 1fr 1fr}
   .col{padding:8px 44px;text-align:center;font-size:15px;line-height:1.55;color:#2b2b2b}
   .col + .col{border-left:1px solid #b7cbbe}
-  .col svg{display:block;width:44px;height:44px;stroke:var(--green);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 22px}
+  .col svg{display:block;width:36px;height:36px;fill:var(--green);margin:0 auto 22px}
   .good{background:var(--green-deep);border-radius:20px;padding:64px 80px;text-align:center;margin-top:88px;position:relative;z-index:2;transform:translateY(120px)}
   .good h3{font-size:36px;color:var(--sage-text);margin-bottom:22px;line-height:1.25}
   .good p{color:rgba(255,255,255,.9);font-size:17px;max-width:720px;margin:0 auto;line-height:1.6}
@@ -167,7 +167,7 @@
   .latest .cardpale{background:var(--pale);border-radius:16px;min-height:520px;display:grid;place-items:center;padding:60px}
   .latest h3{font-size:44px;margin:12px 0 20px;line-height:1.1}
   .latest p{font-size:15px;line-height:1.6;color:#333;max-width:440px;margin-bottom:30px}
-  .latest .btn svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .latest .btn svg{width:14px;height:14px;fill:#fff}
   .latest .grid2{grid-template-columns:1fr 1.15fr}
 
   /* SPEAKING / PARTNERS */
@@ -296,21 +296,21 @@
   <div class="wrap">
     <a class="brand" href="#hero">
       <span class="mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg>
+        <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M240,96a8,8,0,0,1-8,8H216v16a8,8,0,0,1-16,0V104H184a8,8,0,0,1,0-16h16V72a8,8,0,0,1,16,0V88h16A8,8,0,0,1,240,96ZM144,56h8v8a8,8,0,0,0,16,0V56h8a8,8,0,0,0,0-16h-8V32a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16Zm65.14,94.33A88.07,88.07,0,0,1,105.67,46.86a8,8,0,0,0-10.6-9.06A96,96,0,1,0,218.2,160.93a8,8,0,0,0-9.06-10.6Z"/></svg>
       </span>
       Maya Iyer
     </a>
     <nav class="links" aria-label="Primary">
-      <a href="#podcast">Learn <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="#crisis">Topics <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="#speaking">Work with Maya <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="#about">About <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="#books">Books <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#podcast">Learn <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></a>
+      <a href="#crisis">Topics <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></a>
+      <a href="#speaking">Work with Maya <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></a>
+      <a href="#about">About <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></a>
+      <a href="#books">Books <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></a>
       <a href="#membership">Membership</a>
       <a href="#hero">Retreats</a>
     </nav>
-    <a class="sub" href="#signup">Subscribe <i><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></i></a>
-    <button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="sub" href="#signup">Subscribe <i><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg></i></a>
+    <button class="burger" aria-label="Menu"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg></button>
   </div>
 </header>
 
@@ -362,8 +362,8 @@
     <div class="hero-ctl">
       <div class="dots" id="heroDots"><span class="on"></span><span></span><span></span><span></span><span></span></div>
       <div class="btns">
-        <button class="circ" id="heroPrev" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7"/></svg></button>
-        <button class="circ" id="heroNext" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+        <button class="circ" id="heroPrev" aria-label="Previous slide"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></svg></button>
+        <button class="circ" id="heroNext" aria-label="Next slide"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></button>
       </div>
     </div>
   </div>
@@ -384,8 +384,8 @@
     </div>
     <div class="side">
       <div class="btns">
-        <button class="circ" id="tPrev" aria-label="Previous quote"><svg viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7"/></svg></button>
-        <button class="circ" id="tNext" aria-label="Next quote"><svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+        <button class="circ" id="tPrev" aria-label="Previous quote"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></svg></button>
+        <button class="circ" id="tNext" aria-label="Next quote"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></button>
       </div>
       <blockquote id="tQuote">"Since following Maya's protocol I fall asleep in ten minutes. I did not know this was possible for me."</blockquote>
       <div class="who">
@@ -415,15 +415,15 @@
     <h2 class="h-lg">We're in a sleep crisis</h2>
     <div class="cols">
       <div class="col">
-        <svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/><path d="M17 3v4M15 5h4"/></svg>
+        <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"/></svg>
         Roughly one in three adults sleeps under seven hours a night, and most of them have stopped noticing.
       </div>
       <div class="col">
-        <svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/><path d="M4 8v8M20 8v8"/></svg>
+        <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM72,64H184V192H72Zm8-32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z"/></svg>
         We're scrolling later, waking earlier, and treating rest as the thing we do once everything else is finished.
       </div>
       <div class="col">
-        <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>
+        <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,200h-8V40a8,8,0,0,0-8-8H152a8,8,0,0,0-8,8V80H96a8,8,0,0,0-8,8v40H48a8,8,0,0,0-8,8v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16ZM160,48h40V200H160ZM104,96h40V200H104ZM56,144H88v56H56Z"/></svg>
         The data is blunt: short sleep is now tied to heart disease, weight gain, anxiety and slower thinking.
       </div>
     </div>
@@ -477,7 +477,7 @@
       <span class="label">Latest Book</span>
       <h3>The Rested Mind</h3>
       <p>From the bestselling author of <em>Deep Rest</em>, the definitive account of how the modern day quietly steals your recovery - and a plan to take it back, one night at a time.</p>
-      <a class="btn" href="#signup">Order Now <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a class="btn" href="#signup">Order Now <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></a>
     </div>
     <div class="cardpale">
       <div class="cover">
@@ -568,7 +568,7 @@
       <div class="lft">
         <h3>Your invitation to a life of deeper rest and energy.</h3>
         <p>Join Maya for a monthly live session backed by daily tools that turn the research into a routine you can keep.</p>
-        <a class="btn" href="#signup">Join Now <svg viewBox="0 0 24 24" style="stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a class="btn" href="#signup">Join Now <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg></a>
       </div>
       <div class="phone" aria-hidden="true">
         <div class="notch"></div>
