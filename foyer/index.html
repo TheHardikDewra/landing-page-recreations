@@ -359,7 +359,8 @@
   .below .h { position: relative; }
   .col.has-pop { position: relative; z-index: 40; }
   .below .city { border: 0; background: none; font: inherit; cursor: pointer; padding: 0; }
-  .citypop { position: absolute; left: 0; top: calc(100% + 10px); width: 100%; z-index: 30; border-radius: 16px; padding: 12px; background: color-mix(in srgb, var(--card) 86%, transparent); border: 1px solid var(--div); box-shadow: 0 24px 60px rgba(0,0,0,.18); backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4); transform-origin: 20px 0; animation: popin .22s cubic-bezier(.2,.8,.2,1); }
+  .below .col { position: relative; }
+  .citypop { position: absolute; left: 0; top: var(--pop-top, 46px); width: 100%; z-index: 30; border-radius: 16px; padding: 12px; background: color-mix(in srgb, var(--card) 86%, transparent); border: 1px solid var(--div); box-shadow: 0 24px 60px rgba(0,0,0,.18); backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4); transform-origin: 20px 0; animation: popin .22s cubic-bezier(.2,.8,.2,1); }
   .citypop[hidden] { display: none; }
   @keyframes popin { from { opacity: 0; transform: translateY(-6px) scale(.98); } to { opacity: 1; transform: none; } }
   .citypop .tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
@@ -609,7 +610,7 @@
   var btn=document.getElementById('cityBtn'),pop=document.getElementById('citypop'),name=document.getElementById('cityName');
   if(!btn||!pop) return;
   var col=btn.closest('.col');
-  function open(){pop.hidden=false;btn.setAttribute('aria-expanded','true');if(col)col.classList.add('has-pop');}
+  function open(){if(col){var h=btn.closest('.h');pop.style.setProperty('--pop-top',(h.offsetTop+h.offsetHeight+10)+'px');col.classList.add('has-pop');}pop.hidden=false;btn.setAttribute('aria-expanded','true');}
   function close(){pop.hidden=true;btn.setAttribute('aria-expanded','false');if(col)col.classList.remove('has-pop');}
   btn.addEventListener('click',function(e){e.stopPropagation();pop.hidden?open():close();});
   document.addEventListener('click',function(e){if(!pop.hidden&&!pop.contains(e.target))close();});
