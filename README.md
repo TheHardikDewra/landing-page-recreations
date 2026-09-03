@@ -9,6 +9,7 @@ Landing pages rebuilt section-for-section from sites whose structure I admire. E
 | [`/maya-iyer`](maya-iyer/index.html) | arthurbrooks.com | Dr. Maya Iyer - a sleep scientist's personal brand. Hero carousel, testimonial carousel, quiz band, crisis-to-solution arc, podcast, books, speaking, partnerships, membership, signup footer. |
 | [`/harbor`](harbor/index.html) | calendly.com | Harbor - a client-ops SaaS for freelancers. Product tabs, four-step process, four accordion feature blocks, customer stories, integrations, get-started, marquee, footer. |
 | [`/tessera`](tessera/index.html) | trykintsugi.com | Tessera - license and permit compliance for multi-location operators. Hero window stack, logo band, filing table, three pillars, dark CTA bands, AI grid, switchable coverage map, support block, six differentiators, two review marquees, product carousel, 3D story coverflow, closing, footer. |
+| [`/chairside`](chairside/index.html) | dentai.ai | Chairside - an AI receptionist for dental practices. Tilted product dashboard, PMS logo grid, four feature cards, five switchable call scenarios with a scrubbing waveform player, nine-system integration orbit, four-step onboarding, three security seals, FAQ, CTA band, newsletter footer. |
 
 The hub at `/` links all of them.
 
@@ -29,6 +30,7 @@ All photos and poster art were generated with [Higgsfield](https://higgsfield.ai
 - Tessera customer stories: GPT Image 2, six 3:4 documentary frames, one per industry.
 - Maya Iyer: one GPT Image 2 portrait as the identity anchor, then Nano Banana Pro with that portrait as a reference for every other scene, so the same person appears across the page.
 - Harbor: GPT Image 2 for the customer and marquee photos.
+- Chairside: one GPT Image 2 contact sheet of six headshots, sliced into the call-scenario callers and the newsletter cluster.
 
 Product mockups, book covers, the phone, and every Tessera dashboard are built in CSS and inline SVG.
 
@@ -49,6 +51,7 @@ foyer-v2/           Foyer + five extra sections (shares /foyer/img)
 maya-iyer/          page + img/hero-1..5, testimonial, portrait, podcast, speaking, partnership
 harbor/             page + img/story-1..5, marquee-1..4
 tessera/            page + img/story-1..6
+chairside/          page + img/avatar-1..6
 vercel.json         cleanUrls
 ```
 

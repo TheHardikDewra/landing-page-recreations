@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chairside — AI reception for dental practices</title>
+<meta name="description" content="Chairside answers every call your practice misses, books straight into your software, and hands you the notes in the morning. 24/7, in 22 languages.">
+<meta name="theme-color" content="#244C68">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235A8EB9'/%3E%3Cpath d='M16 7c-3.2 0-5 1.3-5 1.3S9.4 7.6 8.2 8C6.6 8.6 6 10.2 6 12c0 2.6 1 4.4 1.6 6.4.5 1.7.6 3.4.9 4.8.3 1.5.9 2.3 1.8 2.3 1.1 0 1.5-1 1.8-2.6.3-1.6.6-3.6 1.4-4.6.5-.6 1.4-.9 2.5-.9s2 .3 2.5.9c.8 1 1.1 3 1.4 4.6.3 1.6.7 2.6 1.8 2.6.9 0 1.5-.8 1.8-2.3.3-1.4.4-3.1.9-4.8C26 16.4 27 14.6 27 12c0-1.8-.6-3.4-2.2-4-1.2-.4-2.8.3-2.8.3S19.2 7 16 7Z' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+/* ── tokens ─────────────────────────────────────────────── */
+:root{
+  --ink:#244C68;            /* every word on the page */
+  --ink-60:rgba(36,76,104,.62);
+  --ink-40:rgba(36,76,104,.42);
+  --ink-14:rgba(36,76,104,.14);
+  --ink-08:rgba(36,76,104,.08);
+  --accent:#548DB6;         /* accent line, links */
+  --blue:#6AA3CC;           /* blue surfaces */
+  --btn:#5A8EB9;            /* buttons */
+  --btn-press:#4E7FA6;
+  --wash:#E5F5FF;           /* pale blue CTA card */
+  --card:#F9FAFB;
+  --band:#F2F4F7;
+  --line:#E4E7EC;
+  --page:#FFFFFF;
+  --shell:1200px;
+  --r-lg:24px;  --r-md:16px;  --r-sm:10px;
+  --sec:clamp(72px,7.2vw,120px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip}
+body{
+  margin:0;background:var(--page);color:var(--ink);
+  font-family:"Geist","Geist Fallback",Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  font-variant-ligatures:common-ligatures;overflow-x:clip;
+}
+img{max-width:100%;display:block}
+button,input{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+.shell{width:100%;max-width:var(--shell);margin-inline:auto;padding-inline:24px}
+h1,h2,h3,h4,p{margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ── type scale ─────────────────────────────────────────── */
+.h1{font-size:clamp(38px,5.1vw,68px);line-height:1.04;letter-spacing:-.032em;font-weight:600}
+.h2{font-size:clamp(30px,3.4vw,46px);line-height:1.1;letter-spacing:-.028em;font-weight:600;text-wrap:balance}
+.h3{font-size:clamp(22px,1.9vw,27px);line-height:1.22;letter-spacing:-.02em;font-weight:600}
+.h4{font-size:19px;line-height:1.3;letter-spacing:-.012em;font-weight:600}
+.lead{font-size:clamp(16px,1.25vw,18px);line-height:1.6;color:var(--ink-60);text-wrap:balance}
+.small{font-size:14px;line-height:1.5}
+.eyebrow-txt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:var(--ink-60)}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* ── buttons ────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:46px;padding:0 22px;border-radius:999px;border:1px solid transparent;
+  font-size:15px;font-weight:500;letter-spacing:-.006em;cursor:pointer;
+  transition:background-color .16s ease,border-color .16s ease,transform .12s ease,color .16s ease}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--btn);color:#fff;box-shadow:0 1px 2px rgba(36,76,104,.22)}
+.btn-primary:hover{background:var(--btn-press)}
+.btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink-40);background:var(--card)}
+.btn-white{background:#fff;color:var(--ink);font-weight:600}
+.btn-white:hover{background:#EEF4F9}
+.btn-sm{height:38px;padding:0 16px;font-size:14px}
+
+/* ── nav ────────────────────────────────────────────────── */
+.nav-wrap{position:fixed;inset:12px 0 auto;z-index:60;display:flex;justify-content:center;
+  pointer-events:none;transition:transform .28s ease}
+.nav{pointer-events:auto;width:min(1160px,calc(100% - 32px));display:flex;align-items:center;gap:20px;
+  height:64px;padding:0 10px 0 20px;border-radius:999px;background:rgba(255,255,255,.82);
+  backdrop-filter:blur(18px) saturate(1.6);-webkit-backdrop-filter:blur(18px) saturate(1.6);
+  border:1px solid var(--line);box-shadow:0 1px 2px rgba(36,76,104,.05),0 8px 28px -18px rgba(36,76,104,.5)}
+.brand{display:flex;align-items:center;gap:9px;font-size:20px;font-weight:600;letter-spacing:-.03em}
+.brand svg{width:26px;height:26px;flex:none}
+.nav-links{display:flex;align-items:center;gap:4px;margin-left:auto}
+.nav-links a{padding:8px 14px;border-radius:999px;font-size:14.5px;font-weight:500;color:var(--ink-60);
+  transition:color .15s ease,background-color .15s ease}
+.nav-links a:hover{color:var(--ink);background:var(--ink-08)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.burger{display:none;width:42px;height:42px;border-radius:999px;border:1px solid var(--line);
+  background:#fff;align-items:center;justify-content:center;cursor:pointer}
+.burger svg{width:19px;height:19px}
+.mobile-menu{display:none;position:fixed;inset:88px 16px auto;z-index:59;background:#fff;
+  border:1px solid var(--line);border-radius:var(--r-lg);padding:10px;
+  box-shadow:0 24px 60px -28px rgba(36,76,104,.45)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:13px 14px;border-radius:var(--r-sm);font-weight:500}
+.mobile-menu a:hover{background:var(--card)}
+.mobile-menu .row{display:flex;gap:8px;padding:10px 4px 4px}
+.mobile-menu .row .btn{flex:1}
+
+/* ── section eyebrow (pill + dotted rails) ──────────────── */
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px}
+.eyebrow .pill{display:inline-flex;align-items:center;height:32px;padding:0 16px;border-radius:999px;
+  border:1px solid var(--line);background:#fff;font-size:13.5px;font-weight:500;color:var(--accent)}
+.eyebrow .rail{display:flex;align-items:center;gap:7px}
+.eyebrow .rail i{display:block;width:44px;height:1px;background:var(--accent);opacity:.55}
+.eyebrow .rail b{display:grid;grid-template-columns:repeat(2,3px);gap:3px}
+.eyebrow .rail b span{width:3px;height:3px;border-radius:50%;background:var(--accent);opacity:.5}
+.eyebrow .rail.left{flex-direction:row}
+.eyebrow .rail.right{flex-direction:row-reverse}
+
+.sec{padding-block:var(--sec)}
+.sec-head{text-align:center;max-width:640px;margin-inline:auto;margin-bottom:56px}
+.sec-head .lead{margin-top:14px}
+
+/* ── hero ───────────────────────────────────────────────── */
+.hero{padding-top:150px;padding-bottom:0;overflow:hidden;position:relative}
+.hero-copy{max-width:760px;position:relative;z-index:3}
+.hero h1 .row1{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hero h1 .blue{color:var(--accent)}
+.spark{width:56px;height:56px;flex:none;border-radius:14px;background:#fff;border:1px solid var(--line);
+  display:grid;place-items:center;box-shadow:0 2px 10px -4px rgba(36,76,104,.28)}
+.spark svg{width:28px;height:28px;color:var(--blue)}
+.hero .lead{margin-top:22px;max-width:530px}
+.hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{margin-top:16px;font-size:13.5px;color:var(--ink-40)}
+.hero-stage{margin-top:22px;position:relative;height:clamp(270px,26vw,375px);z-index:1}
+.hero-stage .plate{position:absolute;left:0;top:0;width:min(1500px,132%);
+  transform:perspective(2200px) rotateX(46deg) rotateZ(-22deg);
+  transform-origin:0 0;filter:drop-shadow(0 40px 60px rgba(36,76,104,.18))}
+
+/* dashboard mockup */
+.dash{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;min-height:520px}
+.dash-side{width:212px;flex:none;border-right:1px solid var(--line);padding:18px 14px;background:#FCFDFE}
+.dash-side .brand{font-size:17px;margin-bottom:22px;padding-left:6px}
+.dash-side .grp{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40);
+  padding:0 8px;margin:16px 0 8px}
+.dash-side .item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;
+  font-size:13.5px;color:var(--ink-60)}
+.dash-side .item svg{width:16px;height:16px}
+.dash-side .item.on{background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:500}
+.dash-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.dash-top{height:56px;border-bottom:1px solid var(--line);display:flex;align-items:center;
+  gap:10px;padding:0 18px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-60)}
+.dash-top .me{margin-left:auto;display:flex;align-items:center;gap:8px;padding:5px 10px 5px 5px;
+  border:1px solid var(--line);border-radius:999px;text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink)}
+.dash-top .me img{width:24px;height:24px;border-radius:50%}
+.dash-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:18px}
+.stat{border:1px solid var(--line);border-radius:14px;padding:15px;background:#fff}
+.stat .k{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40)}
+.stat .v{display:flex;align-items:baseline;gap:8px;margin-top:5px}
+.stat .v b{font-size:26px;font-weight:600;letter-spacing:-.03em}
+.chip{font-size:11px;font-weight:500;padding:2px 7px;border-radius:999px}
+.chip.up{background:#E7F6EC;color:#2C7A48}
+.chip.dn{background:#FDECEC;color:#B3413F}
+.stat p{font-size:12px;color:var(--ink-40);margin-top:6px;line-height:1.45}
+.spark-line{margin-top:10px;height:38px}
+.dash-table{margin:0 18px 18px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.dash-table .thead,.dash-table .trow{display:grid;grid-template-columns:1.2fr 1.3fr .8fr 1.4fr 1.1fr;
+  gap:10px;padding:11px 16px;align-items:center}
+.dash-table .thead{background:#FCFDFE;border-bottom:1px solid var(--line);
+  font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40)}
+.dash-table .trow{border-bottom:1px solid var(--line);font-size:13px}
+.dash-table .trow:last-child{border-bottom:0}
+.badge{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;
+  font-size:12px;font-weight:500;background:var(--btn);color:#fff}
+.badge.grey{background:var(--ink-08);color:var(--ink-60)}
+.muted{color:var(--ink-40)}
+
+/* ── trust row ──────────────────────────────────────────── */
+.trust{padding-top:64px}
+.trust p{text-align:center;font-size:14.5px;color:var(--ink-40);margin-bottom:26px}
+.logos{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.logos .cell{display:grid;place-items:center;padding:26px 18px;border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line)}
+.logos .cell:nth-child(4n){border-right:0}
+.logos .cell:nth-child(n+5){border-bottom:0}
+.logos svg{height:26px;width:auto;color:var(--ink-40);transition:color .2s ease}
+.logos .cell:hover svg{color:var(--ink)}
+
+/* ── feature grid ───────────────────────────────────────── */
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.fcard{background:var(--card);border-radius:var(--r-lg);padding:34px 34px 38px;
+  display:flex;flex-direction:column;overflow:hidden}
+.fcard.blue{background:var(--blue);color:#fff}
+.fcard .art{height:270px;position:relative;margin:-6px -12px 26px;display:grid;place-items:center}
+.fcard .txt{text-align:center;margin-top:auto}
+.fcard .txt p{margin-top:10px;font-size:16.5px;line-height:1.5;color:var(--ink);max-width:34ch;margin-inline:auto}
+.fcard.blue .txt p{color:rgba(255,255,255,.86)}
+
+/* scheduling art */
+.stack-cards{position:relative;width:100%;max-width:min(520px,100%)}
+.stack-cards .lyr{background:#fff;border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 8px 24px -16px rgba(36,76,104,.5)}
+.stack-cards .lyr.a{height:44px;margin-inline:34px;opacity:.5}
+.stack-cards .lyr.b{height:44px;margin:-32px 18px 0;opacity:.75}
+.stack-cards .lyr.c{margin-top:-30px;padding:15px 16px;display:grid;
+  grid-template-columns:repeat(5,auto);gap:10px 14px;justify-content:space-between}
+.stack-cards .kv .k{font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-40)}
+.stack-cards .kv .v{font-size:12px;margin-top:4px;white-space:nowrap}
+.stack-cards .kv .v.time{display:flex;align-items:center;gap:5px;color:var(--ink-60);font-size:11.5px;margin-top:3px}
+.stack-cards .kv .v.time svg{width:12px;height:12px}
+
+/* easy sync art */
+.sync-card{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:390px;color:var(--ink);
+  box-shadow:0 18px 40px -26px rgba(20,50,72,.7)}
+.sync-card .k{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40);margin-bottom:14px}
+.tog{display:flex;gap:11px;margin-bottom:14px}
+.tog .sw{width:34px;height:20px;border-radius:999px;background:var(--ink-14);flex:none;
+  position:relative;transition:background-color .2s ease}
+.tog .sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 2px rgba(36,76,104,.35);transition:transform .2s ease}
+.tog.on .sw{background:var(--btn)}
+.tog.on .sw::after{transform:translateX(14px)}
+.tog .lb b{font-size:14px;font-weight:500;display:block}
+.tog .lb span{font-size:12px;color:var(--ink-40);line-height:1.45;display:block;margin-top:2px}
+.tog.off .lb b{color:var(--ink-40)}
+.sync-card .btn{width:100%;background:#fff;border:1px solid var(--btn);color:var(--btn);margin-top:4px}
+.sync-card .btn:hover{background:var(--wash)}
+
+/* clock art */
+.clock{width:250px;height:250px;position:relative;display:grid;place-items:center}
+.clock .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(36,76,104,.10);background:rgba(255,255,255,.55)}
+.clock .ring.r2{inset:22px;border-color:rgba(36,76,104,.08);background:#fff}
+.clock .face{width:calc(100% - 88px);aspect-ratio:1;border-radius:50%;background:#fff;
+  border:1px solid var(--line);box-shadow:0 14px 34px -22px rgba(36,76,104,.6);position:relative}
+.clock .tick{position:absolute;left:50%;top:9px;width:1.5px;height:8px;border-radius:1px;background:var(--ink-40);transform-origin:50% 72px}
+.clock .hand{position:absolute;left:50%;bottom:50%;border-radius:2px;transform-origin:50% 100%}
+.clock .hand.h{width:3.5px;height:42px;background:var(--ink);margin-left:-1.75px}
+.clock .hand.m{width:3px;height:58px;background:var(--ink);margin-left:-1.5px}
+.clock .hand.s{width:1.8px;height:64px;background:var(--accent);margin-left:-.9px}
+.clock .pin{position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;
+  border-radius:50%;background:var(--accent)}
+
+/* delegation art */
+.notes{position:relative;width:100%;max-width:430px;height:230px}
+.notes .n{position:absolute;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.notes .n .hd{height:30px;display:grid;place-items:center;font-size:12px;color:var(--ink-40);
+  border-bottom:1px solid var(--line)}
+.notes .n .ln{height:6px;border-radius:3px;background:var(--ink-08);margin:9px 14px}
+.notes .n1{left:0;top:26px;width:150px;height:180px;opacity:.45}
+.notes .n2{right:0;top:26px;width:150px;height:180px;opacity:.45}
+.notes .n3{left:50%;top:0;transform:translateX(-50%);width:250px;z-index:2;
+  box-shadow:0 22px 48px -26px rgba(36,76,104,.6)}
+.notes .n3 .hd{background:var(--btn);color:#fff;border-bottom:0;font-weight:500}
+.notes .n3 p{font-size:13.5px;line-height:1.5;padding:14px 16px 16px;color:var(--ink)}
+
+/* ── calls ──────────────────────────────────────────────── */
+.calls{background:var(--card);border-radius:var(--r-lg);padding:36px;display:grid;
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:36px;align-items:start}
+.calls>*,.feat>*,.steps>*,.sec3>*,.foot-cols>*,.foot-top>*{min-width:0}
+.scen h4{margin-bottom:20px}
+.scen ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.scen button{display:flex;align-items:center;gap:13px;width:100%;text-align:left;
+  padding:14px 16px;border-radius:12px;border:0;background:transparent;cursor:pointer;
+  font-size:15.5px;color:var(--ink);transition:background-color .18s ease,color .18s ease}
+.scen button svg{width:19px;height:19px;flex:none;color:var(--ink-40);transition:color .18s ease}
+.scen button .caret{margin-left:auto;opacity:0;transition:opacity .18s ease}
+.scen button:hover{background:var(--ink-08)}
+.scen li.on button{background:var(--blue);color:#fff}
+.scen li.on button svg{color:#fff}
+.scen li.on button .caret{opacity:.9}
+.convo{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:26px 28px 24px;
+  box-shadow:0 20px 44px -34px rgba(36,76,104,.55)}
+.msg{display:flex;gap:14px;align-items:flex-start}
+.msg img,.msg .ai{width:52px;height:52px;border-radius:50%;flex:none}
+.msg .ai{background:var(--btn);display:grid;place-items:center}
+.msg .ai svg{width:26px;height:26px;color:#fff}
+.msg .who{flex:1;min-width:0}
+.msg .who b{font-size:18px;font-weight:600;letter-spacing:-.015em;display:block}
+.msg .who span{font-size:14.5px;color:var(--ink-60)}
+.msg .stamp{text-align:right;font-size:13.5px;color:var(--ink-60);flex:none}
+.msg .stamp em{display:block;font-style:normal;font-size:12.5px;color:var(--ink-40);margin-top:2px}
+.convo .body{font-size:16.5px;line-height:1.55;margin:16px 0 26px}
+.player{display:flex;align-items:center;gap:16px;background:var(--card);border-radius:12px;padding:14px 18px;margin-top:14px}
+.player .play{width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid var(--line);
+  display:grid;place-items:center;cursor:pointer;flex:none;transition:transform .14s ease,border-color .14s ease}
+.player .play:hover{transform:scale(1.06);border-color:var(--accent)}
+.player .play svg{width:17px;height:17px;color:var(--ink);margin-left:2px}
+.wave{flex:1;min-width:0;height:44px;display:flex;align-items:center;gap:2.5px;overflow:hidden}
+.wave i{display:block;width:2.5px;border-radius:2px;background:var(--ink-14);flex:none}
+.wave i.lit{background:var(--btn)}
+.player .t{font-size:13.5px;flex:none;font-variant-numeric:tabular-nums}
+.player .t b{font-weight:600}
+.player .t span{color:var(--ink-40)}
+
+/* ── integrations orbit ─────────────────────────────────── */
+.orbit-sec{background:var(--band)}
+.orbit{position:relative;width:min(720px,100%);aspect-ratio:1;margin-inline:auto}
+.orbit .ring{position:absolute;border-radius:50%;border:1px solid rgba(36,76,104,.11);
+  left:50%;top:50%;transform:translate(-50%,-50%)}
+.orbit .ring.r1{width:38%;height:38%}
+.orbit .ring.r2{width:66%;height:66%}
+.orbit .ring.r3{width:94%;height:94%}
+.orbit .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:20%;aspect-ratio:1;border-radius:50%;background:var(--btn);display:grid;place-items:center;
+  box-shadow:0 20px 46px -20px rgba(36,76,104,.6)}
+.orbit .core svg{width:46%;height:auto;color:#fff}
+.orbit .node{position:absolute;left:50%;top:50%;width:96px;height:96px;border-radius:50%;
+  background:#fff;display:grid;place-items:center;padding:14px;
+  box-shadow:0 12px 30px -16px rgba(36,76,104,.45);border:1px solid transparent}
+.orbit .node.hi{border-color:var(--accent)}
+.orbit .node span{font-size:12.5px;font-weight:600;letter-spacing:-.01em;text-align:center;line-height:1.2}
+.orbit .node small{display:block;font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;
+  font-weight:500;color:var(--ink-40);margin-top:3px}
+
+/* ── steps ──────────────────────────────────────────────── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:#fff;
+  display:flex;flex-direction:column;min-height:430px}
+.step .top{padding:24px 24px 20px}
+.step .n{display:inline-flex;align-items:center;height:26px;padding:0 11px;border-radius:999px;
+  border:1px solid var(--line);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  font-weight:500;color:var(--accent)}
+.step h3{margin-top:14px;font-size:20px;line-height:1.25;letter-spacing:-.018em;font-weight:600}
+.step .art{flex:1;background:var(--card);position:relative;overflow:hidden;border-top:1px solid var(--line)}
+.step .art > *{position:absolute}
+.mini{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.mini .k{font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40)}
+.mini .v{font-size:12.5px;margin-top:3px;white-space:nowrap}
+.mini .ln{height:5px;border-radius:3px;background:var(--ink-08);margin-top:8px}
+.req::after{content:"*";color:#C0554F;margin-left:2px}
+
+/* ── security ───────────────────────────────────────────── */
+.sec3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.scard{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:#fff}
+.scard .art{height:210px;background:var(--card);display:grid;place-items:center;
+  border-bottom:1px solid var(--line);position:relative}
+.scard .art::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:44px 44px;opacity:.5}
+.seal{width:118px;height:118px;position:relative;z-index:1}
+.seal svg{width:100%;height:100%;color:#D6E7F2}
+.seal .lbl{position:absolute;inset:0;display:grid;place-items:center;text-align:center;line-height:1.1}
+.seal .lbl b{font-size:17px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.seal.shield .lbl{padding-top:12px}
+.seal .tick{width:34px;height:34px;color:var(--btn);margin:0 auto 6px}
+.seal .lbl small{display:block;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-40);margin-top:3px}
+.scard .txt{padding:24px 26px 28px}
+.scard .txt p{margin-top:10px;font-size:15px;line-height:1.55;color:var(--ink-60)}
+
+/* ── faq ────────────────────────────────────────────────── */
+.faq{max-width:800px;margin-inline:auto;display:flex;flex-direction:column;gap:12px}
+.q{border:1px solid var(--line);border-radius:var(--r-md);background:#fff;overflow:hidden;
+  transition:border-color .18s ease}
+.q[open]{border-color:var(--ink-14)}
+.q summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:18px;
+  padding:22px 24px;font-size:17px;font-weight:500;letter-spacing:-.012em}
+.q summary::-webkit-details-marker{display:none}
+.q summary .ic{margin-left:auto;width:22px;height:22px;flex:none;position:relative}
+.q summary .ic::before,.q summary .ic::after{content:"";position:absolute;background:var(--ink-60);
+  border-radius:2px;transition:transform .22s ease,opacity .22s ease}
+.q summary .ic::before{inset:10px 2px auto;height:1.6px}
+.q summary .ic::after{inset:2px auto 2px 10px;width:1.6px}
+.q[open] summary .ic::after{transform:rotate(90deg);opacity:0}
+.q .a{padding:0 24px 24px;font-size:16px;line-height:1.6;color:var(--ink-60);max-width:65ch}
+
+/* ── cta band ───────────────────────────────────────────── */
+.cta{background:var(--wash);border-radius:var(--r-lg);padding:74px 40px 82px;text-align:center;
+  position:relative;overflow:hidden}
+.cta .mark{position:absolute;right:-30px;bottom:-64px;width:330px;height:330px;color:#fff;opacity:.8}
+.cta > *{position:relative;z-index:1}
+.cta .lead{margin:18px auto 30px;max-width:520px}
+
+/* ── footer ─────────────────────────────────────────────── */
+footer{padding-top:96px;padding-bottom:40px}
+.foot-top{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:start;padding-bottom:44px}
+.foot-top p{margin-top:12px;max-width:400px;font-size:15.5px;line-height:1.55;color:var(--ink-60)}
+.sub-form{display:flex;height:48px;border:1px solid var(--line);border-radius:999px;
+  background:#fff;overflow:hidden;width:min(420px,100%)}
+.sub-form input{flex:1;min-width:0;border:0;outline:0;padding:0 20px;font-size:15px;background:transparent}
+.sub-form input::placeholder{color:var(--ink-40)}
+.sub-form button{border:0;background:var(--btn);color:#fff;font-weight:600;font-size:14.5px;
+  padding:0 24px;cursor:pointer;transition:background-color .16s ease}
+.sub-form button:hover{background:var(--btn-press)}
+.sub-note{display:flex;align-items:center;gap:12px;margin-top:14px}
+.faces{display:flex;flex:none}
+.faces img{width:34px;height:34px;border-radius:50%;border:2px solid #fff;object-fit:cover}
+.faces img+img{margin-left:-11px}
+.sub-note p{font-size:13.5px;line-height:1.45;color:var(--ink-40);max-width:300px;margin:0;min-width:0}
+.foot-cols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;
+  border-top:1px solid var(--line);padding-top:44px}
+.foot-cols h5{margin:0 0 14px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  font-weight:600;color:var(--ink-40)}
+.foot-cols ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.foot-cols a{font-size:14.5px;color:var(--ink-60);transition:color .15s ease}
+.foot-cols a:hover{color:var(--ink)}
+.foot-cols .about p{margin-top:14px;font-size:14px;line-height:1.55;color:var(--ink-60);max-width:280px}
+.foot-bottom{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--line);margin-top:44px;padding-top:26px;font-size:13.5px;color:var(--ink-40)}
+.foot-bottom a{color:var(--ink-40)}
+.foot-bottom a:hover{color:var(--ink)}
+
+/* ── reveal ─────────────────────────────────────────────── */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .62s cubic-bezier(.22,.61,.36,1),transform .62s cubic-bezier(.22,.61,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ── responsive ─────────────────────────────────────────── */
+@media (max-width:1080px){
+  .nav-links,.nav-cta .btn-ghost{display:none}
+  .burger{display:flex}
+  .hero-stage .plate{width:150%}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .sec3{grid-template-columns:1fr}
+  .logos{grid-template-columns:repeat(3,1fr)}
+  .logos .cell:nth-child(4n){border-right:1px solid var(--line)}
+  .logos .cell:nth-child(3n){border-right:0}
+  .logos .cell:nth-child(n+5){border-bottom:1px solid var(--line)}
+  .logos .cell:nth-child(n+7){border-bottom:0}
+  .foot-cols{grid-template-columns:1fr 1fr}
+}
+@media (max-width:820px){
+  .feat{grid-template-columns:1fr}
+  .calls{grid-template-columns:1fr;padding:26px}
+  .foot-top{grid-template-columns:1fr}
+  .orbit{width:100%}
+  .orbit .node{width:82px;height:82px;padding:8px}
+  .orbit .node span{font-size:10.5px}
+  .orbit .node small{display:none}
+}
+@media (max-width:640px){
+  :root{--sec:64px}
+  .spark{display:none}
+  .hero h1 .row1{gap:0}
+  .stack-cards .lyr.c{grid-template-columns:repeat(3,auto)}
+  .stack-cards .kv:nth-child(n+4){display:none}
+  .notes .n1,.notes .n2{display:none}
+  .notes .n3{width:min(280px,100%)}
+  .shell{padding-inline:18px}
+  .hero{padding-top:118px}
+  .hero-stage{height:300px;margin-top:40px}
+  .hero-stage .plate{width:200%;transform:perspective(1600px) rotateX(48deg) rotateZ(-20deg)}
+  .spark{width:44px;height:44px;border-radius:12px}
+  .spark svg{width:22px;height:22px}
+  .steps{grid-template-columns:1fr}
+  .step{min-height:360px}
+  .logos{grid-template-columns:repeat(2,1fr)}
+  .logos .cell:nth-child(n){border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .logos .cell:nth-child(2n){border-right:0}
+  .logos .cell:nth-child(n+9){border-bottom:0}
+  .foot-cols{grid-template-columns:1fr}
+  .fcard{padding:26px 22px 30px}
+  .fcard .art{height:230px}
+  .cta{padding:52px 24px 56px}
+  .cta .mark{width:230px;height:230px;right:-50px;bottom:-50px}
+  .msg .stamp{display:none}
+  .sec-head{margin-bottom:40px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-tooth" viewBox="0 0 256 256"><path fill="currentColor" d="M171,71.42,149.54,80,171,88.57A8,8,0,1,1,165,103.42L128,88.61,91,103.42A8,8,0,1,1,85,88.57L106.46,80,85,71.42A8,8,0,1,1,91,56.57l37,14.81,37-14.81A8,8,0,1,1,171,71.42Zm53,8.33c0,42.72-8,75.4-14.69,95.28-8.73,25.8-20.63,45.49-32.65,54a15.69,15.69,0,0,1-15.95,1.41,16.09,16.09,0,0,1-9.18-13.36C150.68,205.58,146.48,168,128,168s-22.68,37.59-23.53,49.11a16.09,16.09,0,0,1-16,14.9,15.67,15.67,0,0,1-9.13-2.95c-12-8.53-23.92-28.22-32.65-54C40,155.15,32,122.47,32,79.75A56,56,0,0,1,88,24h80A56,56,0,0,1,224,79.75Zm-16,0A40,40,0,0,0,168,40H88A40,40,0,0,0,48,79.76c0,40.55,7.51,71.4,13.85,90.14,11.05,32.66,23,43.37,26.61,46C91.57,174.67,105.59,152,128,152s36.45,22.71,39.49,63.94h0c3.6-2.59,15.57-13.26,26.66-46C200.49,151.16,208,120.31,208,79.76Z"/></symbol>
+<symbol id="i-tooth-solid" viewBox="0 0 256 256"><path fill="currentColor" d="M168,24H88A56.06,56.06,0,0,0,32,80c0,42.72,8,75.4,14.69,95.28,8.73,25.8,20.63,45.49,32.65,54A15.67,15.67,0,0,0,88.47,232a16.09,16.09,0,0,0,16-14.9C105.32,205.59,109.52,168,128,168s22.68,37.59,23.53,49.11a16.09,16.09,0,0,0,9.18,13.36,15.69,15.69,0,0,0,15.95-1.41c12-8.53,23.92-28.22,32.65-54C216,155.15,224,122.47,224,80A56.06,56.06,0,0,0,168,24Zm3,47.42L149.54,80,171,88.57A8,8,0,1,1,165,103.42L128,88.61,91,103.42A8,8,0,1,1,85,88.57L106.46,80,85,71.42A8,8,0,1,1,91,56.57l37,14.81,37-14.81A8,8,0,1,1,171,71.42Z"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 256 256"><path fill="currentColor" d="M197.58,129.06,146,110l-19-51.62a15.92,15.92,0,0,0-29.88,0L78,110l-51.62,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0L146,178l51.62-19a15.92,15.92,0,0,0,0-29.88ZM137,164.22a8,8,0,0,0-4.74,4.74L112,223.85,91.78,169A8,8,0,0,0,87,164.22L32.15,144,87,123.78A8,8,0,0,0,91.78,119L112,64.15,132.22,119a8,8,0,0,0,4.74,4.74L191.85,144ZM144,40a8,8,0,0,1,8-8h16V16a8,8,0,0,1,16,0V32h16a8,8,0,0,1,0,16H184V64a8,8,0,0,1-16,0V48H152A8,8,0,0,1,144,40ZM248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88Z"/></symbol>
+<symbol id="i-cal" viewBox="0 0 256 256"><path fill="currentColor" d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-38.34-85.66a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L116,164.69l42.34-42.35A8,8,0,0,1,169.66,122.34Z"/></symbol>
+<symbol id="i-redo" viewBox="0 0 256 256"><path fill="currentColor" d="M224,48V96a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h28.69L182.06,73.37a79.56,79.56,0,0,0-56.13-23.43h-.45A79.52,79.52,0,0,0,69.59,72.71,8,8,0,0,1,58.41,61.27a96,96,0,0,1,135,.79L208,76.69V48a8,8,0,0,1,16,0ZM186.41,183.29a80,80,0,0,1-112.47-.66L59.31,168H88a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8v48a8,8,0,0,0,16,0V179.31l14.63,14.63A95.43,95.43,0,0,0,130,222.06h.53a95.36,95.36,0,0,0,67.07-27.33,8,8,0,0,0-11.18-11.44Z"/></symbol>
+<symbol id="i-x" viewBox="0 0 256 256"><path fill="currentColor" d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol>
+<symbol id="i-warn" viewBox="0 0 256 256"><path fill="currentColor" d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z"/></symbol>
+<symbol id="i-phone" viewBox="0 0 256 256"><path fill="currentColor" d="M144.27,45.93a8,8,0,0,1,9.8-5.66,86.22,86.22,0,0,1,61.66,61.66,8,8,0,0,1-5.66,9.8A8.23,8.23,0,0,1,208,112a8,8,0,0,1-7.73-5.94,70.35,70.35,0,0,0-50.33-50.33A8,8,0,0,1,144.27,45.93Zm-2.33,41.8c13.79,3.68,22.65,12.54,26.33,26.33A8,8,0,0,0,176,120a8.23,8.23,0,0,0,2.07-.27,8,8,0,0,0,5.66-9.8c-5.12-19.16-18.5-32.54-37.66-37.66a8,8,0,1,0-4.13,15.46Zm81.94,95.35A56.26,56.26,0,0,1,168,232C88.6,232,24,167.4,24,88A56.26,56.26,0,0,1,72.92,32.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,109.39,104c-.18.27-.37.52-.57.77L88,129.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,223.88,183.08Zm-15.88-2s-.07,0-.11,0h0l-47-21.05-24.35,20.71a8.44,8.44,0,0,1-.74.56,16,16,0,0,1-15.75,1.14c-18.73-9.05-37.4-27.58-46.46-46.11a16,16,0,0,1,1-15.7,6.13,6.13,0,0,1,.57-.77L96,95.15l-21-47a.61.61,0,0,1,0-.12A40.2,40.2,0,0,0,40,88,128.14,128.14,0,0,0,168,216,40.21,40.21,0,0,0,208,181.07Z"/></symbol>
+<symbol id="i-play" viewBox="0 0 256 256"><path fill="currentColor" d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 256 256"><path fill="currentColor" d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></symbol>
+<symbol id="i-grid" viewBox="0 0 256 256"><path fill="currentColor" d="M104,40H56A16,16,0,0,0,40,56v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,104,40Zm0,64H56V56h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,64H152V56h48v48Zm-96,32H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm0,64H56V152h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,200,136Zm0,64H152V152h48v48Z"/></symbol>
+<symbol id="i-chart" viewBox="0 0 256 256"><path fill="currentColor" d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0V156.69l50.34-50.35a8,8,0,0,1,11.32,0L128,132.69,180.69,80H160a8,8,0,0,1,0-16h40a8,8,0,0,1,8,8v40a8,8,0,0,1-16,0V91.31l-58.34,58.35a8,8,0,0,1-11.32,0L96,123.31l-56,56V200H224A8,8,0,0,1,232,208Z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 256 256"><path fill="currentColor" d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"/></symbol>
+<symbol id="i-shield" viewBox="0 0 256 256"><path fill="currentColor" d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></symbol>
+<symbol id="i-list" viewBox="0 0 256 256"><path fill="currentColor" d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></symbol>
+<symbol id="i-caret" viewBox="0 0 256 256"><path fill="currentColor" d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></symbol>
+<symbol id="i-seal" viewBox="0 0 120 120"><path fill="currentColor" d="M60 2.5 71.2 9.6 84.4 8.1 90.3 20.1 102.6 25.2 101.8 38.6 110.3 48.9 104 60.8 110.3 72.7 101.8 83 102.6 96.4 90.3 101.5 84.4 113.5 71.2 112 60 119.1 48.8 112 35.6 113.5 29.7 101.5 17.4 96.4 18.2 83 9.7 72.7 16 60.8 9.7 48.9 18.2 38.6 17.4 25.2 29.7 20.1 35.6 8.1 48.8 9.6Z"/></symbol>
+<symbol id="i-tooth-plain" viewBox="0 0 256 256"><path fill="currentColor" d="M168,28H88A52,52,0,0,0,36,80c0,41.5,7.8,73.3,14.3,92.6,8.5,25.1,20,44.2,31.6,52.4a11.7,11.7,0,0,0,11.9,1,12,12,0,0,0,6.9-10C101.5,203.6,106,164,128,164s26.5,39.6,27.3,52a12,12,0,0,0,6.9,10,11.7,11.7,0,0,0,11.9-1c11.6-8.2,23.1-27.3,31.6-52.4C212.2,153.3,220,121.5,220,80A52,52,0,0,0,168,28Z"/></symbol><symbol id="i-shield-plain" viewBox="0 0 120 120"><path fill="currentColor" d="M60 3 108 20v34c0 30-19 52-48 63C31 106 12 84 12 54V20Z"/></symbol><symbol id="i-check-circle" viewBox="0 0 256 256"><path fill="currentColor" d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></symbol></defs></svg>
+
+<header class="nav-wrap" id="navwrap">
+  <nav class="nav shell" style="max-width:1160px;padding-inline:20px 10px">
+    <a class="brand" href="#top" aria-label="Chairside, home">
+      <svg viewBox="0 0 256 256" aria-hidden="true" style="color:var(--btn)"><use href="#i-tooth-plain"/></svg>
+      Chairside
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#calls">Calls</a>
+      <a href="#how">How it works</a>
+      <a href="#security">Security</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#top">Log in</a>
+      <a class="btn btn-primary btn-sm" href="#book">Book a demo</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 256 256" aria-hidden="true"><use href="#i-list"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+<div class="mobile-menu" id="mobilemenu">
+  <a href="#features">Features</a>
+  <a href="#calls">Calls</a>
+  <a href="#how">How it works</a>
+  <a href="#security">Security</a>
+  <a href="#faq">FAQ</a>
+  <div class="row">
+    <a class="btn btn-ghost" href="#top">Log in</a>
+    <a class="btn btn-primary" href="#book">Book a demo</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ── hero ───────────────────────────────────────────── -->
+<section class="hero">
+  <div class="shell">
+    <div class="hero-copy">
+      <h1 class="h1">
+        <span class="row1"><span class="blue">Answer every call</span>
+          <span class="spark"><svg viewBox="0 0 256 256" aria-hidden="true"><use href="#i-sparkle"/></svg></span>
+        </span>
+        <span>even the 7pm toothache</span>
+      </h1>
+      <p class="lead">Chairside picks up on the first ring, books straight into your practice software, and leaves the call notes on your desk by morning. Twenty-two languages, no voicemail, no hold music.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#book">Book a 20 minute demo</a>
+        <a class="btn btn-ghost" href="#calls">Hear a real call</a>
+      </div>
+      <p class="hero-note">Live in 9 days on average &middot; No new phone number &middot; Cancel any month</p>
+    </div>
+  </div>
+  <div class="shell">
+    <div class="hero-stage">
+      <div class="plate">
+        <div class="dash">
+          <aside class="dash-side">
+            <span class="brand"><svg viewBox="0 0 256 256" aria-hidden="true" style="color:var(--btn)"><use href="#i-tooth-plain"/></svg> Chairside</span>
+            <div class="grp">Main</div>
+            <div class="item on"><svg viewBox="0 0 256 256"><use href="#i-grid"/></svg> Dashboard</div>
+            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-chart"/></svg> Analytics</div>
+            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-phone"/></svg> Call log</div>
+            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-cal"/></svg> Schedule</div>
+            <div class="grp">Practice</div>
+            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-shield"/></svg> Permissions</div>
+            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-gear"/></svg> Settings</div>
+          </aside>
+          <div class="dash-main">
+            <div class="dash-top">
+              <svg viewBox="0 0 256 256" style="width:15px;height:15px"><use href="#i-grid"/></svg> Dashboard
+              <span class="me"><img src="img/avatar-2.jpg" alt="">Dr. Whitfield</span>
+            </div>
+            <div class="dash-cards">
+              <div class="stat">
+                <div class="k">Calls answered</div>
+                <div class="v"><b class="tnum">1,284</b><span class="chip up">+12%</span></div>
+                <p>Every ring picked up inside 2 seconds this month.</p>
+                <svg class="spark-line" viewBox="0 0 200 38" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#6AA3CC" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="0,30 22,26 44,29 66,18 88,22 110,12 132,16 154,7 176,11 200,4"/></svg>
+              </div>
+              <div class="stat">
+                <div class="k">Booked from calls</div>
+                <div class="v"><b class="tnum">412</b><span class="chip up">+9%</span></div>
+                <p>Appointments written back to your software.</p>
+                <svg class="spark-line" viewBox="0 0 200 38" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#6AA3CC" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="0,26 22,28 44,20 66,24 88,15 110,19 132,10 154,13 176,6 200,8"/></svg>
+              </div>
+              <div class="stat">
+                <div class="k">Missed calls</div>
+                <div class="v"><b class="tnum">6</b><span class="chip dn">&minus;94%</span></div>
+                <p>Down from 98 in the month before you switched.</p>
+                <svg class="spark-line" viewBox="0 0 200 38" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#C7D6E1" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="0,6 22,9 44,7 66,15 88,13 110,22 132,20 154,28 176,26 200,32"/></svg>
+              </div>
+            </div>
+            <div class="dash-table">
+              <div class="thead"><span>Caller</span><span>Outcome</span><span>Status</span><span>Location</span><span>Phone</span></div>
+              <div class="trow"><span>James Brown</span><span>19 Oct, 4:30&ndash;4:45pm</span><span><i class="badge">Booked</i></span><span class="muted">Northgate Dental</span><span class="muted tnum">+1 234 5678 90</span></div>
+              <div class="trow"><span>Priya Raman</span><span>19 Oct, 5:10&ndash;5:40pm</span><span><i class="badge">Booked</i></span><span class="muted">Northgate Dental</span><span class="muted tnum">+1 234 5678 44</span></div>
+              <div class="trow"><span>Alan Whitmore</span><span>Message for Dr. Kim</span><span><i class="badge grey">Note</i></span><span class="muted">Rivermark</span><span class="muted tnum">+1 234 5678 12</span></div>
+              <div class="trow"><span>Sofia Delgado</span><span>20 Oct, 9:00&ndash;9:30am</span><span><i class="badge">Booked</i></span><span class="muted">Rivermark</span><span class="muted tnum">+1 234 5678 07</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── trust ──────────────────────────────────────────── -->
+<section class="trust">
+  <div class="shell rv">
+    <p>Answering the phones at 340 practices across the US and Canada</p>
+    <div class="logos">
+      <div class="cell"><svg viewBox="0 0 190 30" aria-label="Northgate Dental"><text x="0" y="21" font-family="Geist,sans-serif" font-size="19" font-weight="700" letter-spacing="-.6" fill="currentColor">NORTHGATE</text></svg></div>
+      <div class="cell"><svg viewBox="0 0 190 30" aria-label="Rivermark Dentistry"><circle cx="11" cy="15" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M11 8v14M5 15h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><text x="28" y="21" font-family="Geist,sans-serif" font-size="18" font-weight="500" letter-spacing="-.3" fill="currentColor">Rivermark</text></svg></div>
+      <div class="cell"><svg viewBox="0 0 190 30" aria-label="Cobalt Orthodontics"><path d="M4 22 14 6l10 16z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><text x="31" y="21" font-family="Geist,sans-serif" font-size="18" font-weight="600" letter-spacing="-.4" fill="currentColor">Cobalt</text></svg></div>
+      <div class="cell"><svg viewBox="0 0 190 30" aria-label="Harbour Smiles"><text x="0" y="21" font-family="Geist,sans-serif" font-size="18" font-weight="400" letter-spacing="1.8" fill="currentColor">HARBOUR</text></svg></div>
+      <div class="cell"><svg viewBox="0 0 190 30" aria-label="Kingsway Dental Care"><rect x="2" y="6" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M7.5 15.2l3.2 3.2 5.2-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><text x="27" y="21" font-family="Geist,sans-serif" font-size="17" font-weight="600" letter-spacing="-.3" fill="currentColor">Kingsway</text></svg></div>
+      <div class="cell"><svg viewBox="0 0 190 30" aria-label="Meridian Oral Health"><text x="0" y="21" font-family="Geist,sans-serif" font-size="19" font-weight="500" font-style="italic" letter-spacing="-.5" fill="currentColor">meridian</text></svg></div>
+      <div class="cell"><svg viewBox="0 0 190 30" aria-label="Pine and Bough Dental"><path d="M12 4 4 24h16z" fill="currentColor"/><text x="27" y="21" font-family="Geist,sans-serif" font-size="16" font-weight="500" letter-spacing=".4" fill="currentColor">PINE &amp; BOUGH</text></svg></div>
+      <div class="cell"><svg viewBox="0 0 190 30" aria-label="Westport Dental Group"><text x="0" y="21" font-family="Geist,sans-serif" font-size="18" font-weight="700" letter-spacing="-.5" fill="currentColor">Westport</text><circle cx="104" cy="9" r="3" fill="currentColor"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── features ───────────────────────────────────────── -->
+<section class="sec" id="features">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div class="eyebrow">
+        <span class="rail left"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+        <span class="pill">Features</span>
+        <span class="rail right"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+      </div>
+      <h2 class="h2">Four things a front desk never gets to</h2>
+    </div>
+
+    <div class="feat">
+      <!-- scheduling -->
+      <article class="fcard rv">
+        <div class="art">
+          <div class="stack-cards">
+            <div class="lyr a"></div>
+            <div class="lyr b"></div>
+            <div class="lyr c">
+              <div class="kv"><div class="k">Caller</div><div class="v">James Brown</div></div>
+              <div class="kv"><div class="k">Outcome</div><div class="v">19 October 2026</div><div class="v time"><svg viewBox="0 0 256 256"><use href="#i-clock"/></svg> 4:30pm&ndash;4:45pm</div></div>
+              <div class="kv"><div class="k">Status</div><div class="v"><i class="badge">Booked</i></div></div>
+              <div class="kv"><div class="k">Location</div><div class="v">Northgate Dental</div></div>
+              <div class="kv"><div class="k">Phone</div><div class="v tnum">+1 234 5678 90</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="txt">
+          <h3 class="h3">Scheduling</h3>
+          <p>Books, moves and cancels appointments in your calendar while the patient is still on the line.</p>
+        </div>
+      </article>
+
+      <!-- easy sync -->
+      <article class="fcard blue rv">
+        <div class="art">
+          <div class="sync-card">
+            <div class="k">Sync</div>
+            <div class="tog off"><span class="sw"></span><span class="lb"><b>Read the day sheet</b><span>Chairside sees open chairs before it offers a slot.</span></span></div>
+            <div class="tog on"><span class="sw"></span><span class="lb"><b>Write back to the chart</b><span>The booking lands in your software the second the call ends.</span></span></div>
+            <a class="btn" href="#book">Connect your software</a>
+          </div>
+        </div>
+        <div class="txt">
+          <h3 class="h3">Easy sync</h3>
+          <p>Two-way with the practice management system you already pay for. No double entry.</p>
+        </div>
+      </article>
+
+      <!-- assistance -->
+      <article class="fcard rv">
+        <div class="art">
+          <div class="clock" id="clock">
+            <div class="ring"></div><div class="ring r2"></div>
+            <div class="face">
+              <span class="tick" style="transform:translateX(-50%) rotate(0deg)"></span>
+              <span class="tick" style="transform:translateX(-50%) rotate(90deg)"></span>
+              <span class="tick" style="transform:translateX(-50%) rotate(180deg)"></span>
+              <span class="tick" style="transform:translateX(-50%) rotate(270deg)"></span>
+              <span class="hand h" id="ch"></span>
+              <span class="hand m" id="cm"></span>
+              <span class="hand s" id="cs"></span>
+              <span class="pin"></span>
+            </div>
+          </div>
+        </div>
+        <div class="txt">
+          <h3 class="h3">Assistance</h3>
+          <p>Answers at 2am, through lunch, and on the fourth call that arrives at the same second.</p>
+        </div>
+      </article>
+
+      <!-- delegation -->
+      <article class="fcard rv">
+        <div class="art">
+          <div class="notes">
+            <div class="n n1"><div class="hd">Note</div><div class="ln"></div><div class="ln" style="width:60%"></div><div class="ln"></div><div class="ln" style="width:44%"></div></div>
+            <div class="n n2"><div class="hd">Note</div><div class="ln"></div><div class="ln" style="width:70%"></div><div class="ln"></div><div class="ln" style="width:38%"></div></div>
+            <div class="n n3"><div class="hd">Note for Dr. Kim</div><p>Nina Smith wants a hygiene visit in December. Booked Monday 2 Dec, 11:10am. She asked for reminders 72 and 48 hours before.</p></div>
+          </div>
+        </div>
+        <div class="txt">
+          <h3 class="h3">Delegation</h3>
+          <p>Takes a message, or warm-transfers to a human the moment a call needs one.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── calls ──────────────────────────────────────────── -->
+<section class="sec" id="calls" style="padding-top:0">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div class="eyebrow">
+        <span class="rail left"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+        <span class="pill">Calls</span>
+        <span class="rail right"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+      </div>
+      <h2 class="h2">How Chairside handles a call</h2>
+    </div>
+
+    <div class="calls rv">
+      <div class="scen">
+        <h4 class="h4">Example scenarios</h4>
+        <ul id="scenlist">
+          <li class="on"><button type="button" data-i="0"><svg viewBox="0 0 256 256"><use href="#i-cal"/></svg>Booking an appointment<svg class="caret" viewBox="0 0 256 256"><use href="#i-caret"/></svg></button></li>
+          <li><button type="button" data-i="1"><svg viewBox="0 0 256 256"><use href="#i-redo"/></svg>Rescheduling an appointment<svg class="caret" viewBox="0 0 256 256"><use href="#i-caret"/></svg></button></li>
+          <li><button type="button" data-i="2"><svg viewBox="0 0 256 256"><use href="#i-x"/></svg>Cancelling an appointment<svg class="caret" viewBox="0 0 256 256"><use href="#i-caret"/></svg></button></li>
+          <li><button type="button" data-i="3"><svg viewBox="0 0 256 256"><use href="#i-warn"/></svg>Handling an emergency<svg class="caret" viewBox="0 0 256 256"><use href="#i-caret"/></svg></button></li>
+          <li><button type="button" data-i="4"><svg viewBox="0 0 256 256"><use href="#i-phone"/></svg>Answering a billing question<svg class="caret" viewBox="0 0 256 256"><use href="#i-caret"/></svg></button></li>
+        </ul>
+      </div>
+
+      <div class="convo">
+        <div class="msg">
+          <img id="cv-face" src="img/avatar-6.jpg" alt="">
+          <div class="who"><b id="cv-name">Marco Reyes</b><span id="cv-meta">Patient &middot; Portland, OR</span></div>
+          <div class="stamp">21 Jan 2026<em id="cv-t1">12:00 PM</em></div>
+        </div>
+        <p class="body" id="cv-body">Hi, I'd like to book a cleaning for the afternoon of Wednesday the 12th, around five if you have it. If not I'm flexible that week, so anything close to that works.</p>
+        <div class="msg">
+          <span class="ai"><svg viewBox="0 0 256 256"><use href="#i-tooth-plain"/></svg></span>
+          <div class="who"><b>Chairside</b><span id="cv-role">AI receptionist</span></div>
+          <div class="stamp">21 Jan 2026<em id="cv-t2">12:01 PM</em></div>
+        </div>
+        <div class="player">
+          <button class="play" id="playbtn" type="button" aria-label="Play the recording"><svg viewBox="0 0 256 256"><use href="#i-play"/></svg></button>
+          <div class="wave" id="wave" aria-hidden="true"></div>
+          <div class="t"><b id="cv-cur">0:00</b><span id="cv-dur">/1:52</span></div>
+        </div>
+        <p class="small" style="color:var(--ink-40);margin-top:12px" id="cv-out">Outcome &mdash; booked 12 Feb, 5:00pm, written to the chart in 4 seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── integrations ───────────────────────────────────── -->
+<section class="sec orbit-sec" id="integrations">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div class="eyebrow">
+        <span class="rail left"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+        <span class="pill">Integrations</span>
+        <span class="rail right"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+      </div>
+      <h2 class="h2">Runs on the software you already have</h2>
+      <p class="lead">Nine practice management systems today. If yours is not here, tell us on the call and we will scope it.</p>
+    </div>
+    <div class="orbit rv" id="orbit">
+      <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+      <div class="core"><svg viewBox="0 0 256 256" aria-hidden="true"><use href="#i-tooth-plain"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── how it works ───────────────────────────────────── -->
+<section class="sec" id="how">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div class="eyebrow">
+        <span class="rail left"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+        <span class="pill">How it works</span>
+        <span class="rail right"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+      </div>
+      <h2 class="h2">Live in nine days, four steps</h2>
+    </div>
+    <div class="steps">
+      <article class="step rv">
+        <div class="top"><span class="n">Step 1</span><h3>Teach it about your practice</h3></div>
+        <div class="art">
+          <div class="mini" style="left:8%;top:16%;width:78%;transform:rotate(-7deg)">
+            <div class="k req">Appointment type</div><div class="v">Hygiene &middot; recall</div><div class="ln"></div>
+          </div>
+          <div class="mini" style="left:22%;top:44%;width:74%;transform:rotate(-5deg)">
+            <div class="k req">Chair time</div><div class="v">60 mins</div><div class="ln" style="width:60%"></div>
+          </div>
+          <div class="mini" style="left:6%;top:72%;width:80%;transform:rotate(-8deg)">
+            <div class="k req">Provider</div><div class="v">Dr. Kim &middot; Dr. Patel</div>
+          </div>
+        </div>
+      </article>
+      <article class="step rv">
+        <div class="top"><span class="n">Step 2</span><h3>Tune the voice and the rules</h3></div>
+        <div class="art">
+          <div class="mini" style="left:8%;top:12%;width:66%;transform:rotate(-6deg);border-radius:999px;display:flex;align-items:center;gap:8px;padding:8px 14px">
+            <span style="width:22px;height:22px;border-radius:50%;background:var(--btn);display:grid;place-items:center;flex:none"><svg viewBox="0 0 256 256" style="width:13px;height:13px;color:#fff"><use href="#i-tooth-plain"/></svg></span>
+            <span style="font-size:12.5px;color:var(--accent);font-weight:500">Chairside</span>
+          </div>
+          <div style="left:6%;top:34%;width:88%;transform:rotate(-6deg);font-size:12.5px;color:var(--ink-60)">Do you take same-day emergencies?</div>
+          <div class="mini" style="left:6%;top:44%;width:88%;height:56px;transform:rotate(-6deg);color:var(--ink-40);font-size:12.5px">Yes, two slots held daily</div>
+          <div style="left:6%;top:76%;width:88%;transform:rotate(-6deg);font-size:12.5px;color:var(--ink-60)" class="req-wrap">Do you have a VoIP provider?</div>
+          <div class="mini" style="left:6%;top:86%;width:88%;height:44px;transform:rotate(-6deg);font-size:12.5px;color:var(--ink-40)">Yes</div>
+        </div>
+      </article>
+      <article class="step rv">
+        <div class="top"><span class="n">Step 3</span><h3>Watch the calls come in</h3></div>
+        <div class="art">
+          <div class="mini" style="left:-4%;top:14%;width:56%;transform:rotate(-9deg)"><div class="k">Status</div><div class="v"><i class="badge">Booked</i></div></div>
+          <div class="mini" style="right:-6%;top:6%;width:60%;transform:rotate(-9deg)"><div class="k">Caller</div><div class="v">James Brown</div></div>
+          <div class="mini" style="left:18%;top:38%;width:74%;transform:rotate(-9deg);z-index:2;box-shadow:0 14px 30px -18px rgba(36,76,104,.6)"><div class="k">Outcome</div><div class="v">19 October 2026</div><div class="v" style="display:flex;align-items:center;gap:5px;color:var(--ink-60);font-size:11.5px"><svg viewBox="0 0 256 256" style="width:12px;height:12px"><use href="#i-clock"/></svg>4:30pm&ndash;4:45pm</div></div>
+          <div class="mini" style="left:-8%;top:70%;width:66%;transform:rotate(-9deg)"><div class="k">Location</div><div class="v" style="font-size:11.5px">Northgate Dental</div></div>
+          <div class="mini" style="right:-8%;top:76%;width:58%;transform:rotate(-9deg)"><div class="k">Phone</div><div class="v tnum" style="font-size:11.5px">+1 234 5678</div></div>
+        </div>
+      </article>
+      <article class="step rv">
+        <div class="top"><span class="n">Step 4</span><h3>Fill the gaps in your book</h3></div>
+        <div class="art">
+          <div class="mini" style="left:4%;top:12%;width:90%;transform:rotate(-8deg)">
+            <div style="display:flex;align-items:baseline;gap:8px"><span class="k">Recovered</span><span class="chip up" style="margin-left:auto">+18%</span></div>
+            <div class="v tnum" style="font-size:24px;font-weight:600;letter-spacing:-.03em;margin-top:2px">$14,480</div>
+            <div style="font-size:11px;color:var(--ink-40);margin-top:2px">from after-hours calls</div>
+          </div>
+          <div class="mini" style="left:4%;top:56%;width:90%;transform:rotate(-8deg)">
+            <div class="k">Front desk time returned</div>
+            <div class="v tnum" style="font-size:15px;margin-top:4px">38 hours &middot; 12 mins</div>
+            <div style="display:flex;gap:4px;margin-top:9px;align-items:flex-end;height:26px">
+              <i style="flex:1;height:40%;background:var(--ink-08);border-radius:2px"></i>
+              <i style="flex:1;height:62%;background:var(--ink-08);border-radius:2px"></i>
+              <i style="flex:1;height:50%;background:var(--ink-08);border-radius:2px"></i>
+              <i style="flex:1;height:82%;background:var(--blue);border-radius:2px"></i>
+              <i style="flex:1;height:70%;background:var(--ink-08);border-radius:2px"></i>
+              <i style="flex:1;height:100%;background:var(--blue);border-radius:2px"></i>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── security ───────────────────────────────────────── -->
+<section class="sec" id="security" style="padding-top:0">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div class="eyebrow">
+        <span class="rail left"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+        <span class="pill">Security</span>
+        <span class="rail right"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+      </div>
+      <h2 class="h2">Patient data, handled properly</h2>
+    </div>
+    <div class="sec3">
+      <article class="scard rv">
+        <div class="art"><div class="seal"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#i-seal"/></svg><span class="lbl"><span><b>SOC 2</b><small>Type II</small></span></span></div></div>
+        <div class="txt"><h3 class="h4">SOC 2 Type II</h3><p>Audited annually by an independent firm. The report goes out under NDA on request &mdash; ask on the demo call and we will send it the same day.</p></div>
+      </article>
+      <article class="scard rv">
+        <div class="art"><div class="seal"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#i-seal"/></svg><span class="lbl"><span><b>HIPAA</b><small>Compliant</small></span></span></div></div>
+        <div class="txt"><h3 class="h4">HIPAA compliant</h3><p>We sign a BAA before your first call is answered. Protected health information stays encrypted at rest and in transit, and recordings expire on your schedule.</p></div>
+      </article>
+      <article class="scard rv">
+        <div class="art"><div class="seal shield"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#i-shield-plain"/></svg><span class="lbl"><span><svg class="tick" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-check-circle"/></svg><small>Secure</small></span></span></div></div>
+        <div class="txt"><h3 class="h4">Access and monitoring</h3><p>Role-based access, least privilege by default, and a full audit trail of who touched which record. Alerts fire in real time, not in a monthly report.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── faq ────────────────────────────────────────────── -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div class="eyebrow">
+        <span class="rail left"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+        <span class="pill">FAQ</span>
+        <span class="rail right"><i></i><b><span></span><span></span><span></span><span></span></b></span>
+      </div>
+      <h2 class="h2">Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <details class="q rv" open>
+        <summary>What does it cost, and what happens if we stop?<span class="ic"></span></summary>
+        <div class="a">$399 a month for one location and up to 1,200 answered calls, then 22&cent; a call after that. No setup fee, no annual contract. Cancel inside the app and your number routes back to your old system the same day &mdash; we never hold the phone number.</div>
+      </details>
+      <details class="q rv">
+        <summary>How long does setup actually take?<span class="ic"></span></summary>
+        <div class="a">Nine days on average, measured across the last 60 practices. Day one is a 45 minute call where we record your appointment types, chair times and providers. Days two to seven we listen to your real calls in shadow mode without answering. Day eight you approve the transcript review. Day nine it goes live on the hours you choose.</div>
+      </details>
+      <details class="q rv">
+        <summary>Which practice management systems do you write to?<span class="ic"></span></summary>
+        <div class="a">Chartwell, Molar OS, Opaline, ArchDesk, Quadrant, Perio Cloud, Dentiq, Sextant and Riva PMS, with two-way read and write. Everything else is one-way today: Chairside books into a shared calendar and drops the note in your inbox. Tell us your system on the call and we will say plainly whether it is supported.</div>
+      </details>
+      <details class="q rv">
+        <summary>Will patients know they are talking to software?<span class="ic"></span></summary>
+        <div class="a">Yes, because it says so. Chairside opens with the practice name and the sentence <em>&ldquo;you are speaking with an automated receptionist.&rdquo;</em> You can edit that line but you cannot remove it. In our own reviews 8 out of 10 callers finish the booking anyway; the ones who do not get transferred to a human.</div>
+      </details>
+      <details class="q rv">
+        <summary>What happens on a real emergency?<span class="ic"></span></summary>
+        <div class="a">You define the trigger words &mdash; swelling, trauma, bleeding, severe pain. When one is heard, Chairside stops trying to book, reads back your emergency script, and either transfers to the on-call number or texts the duty clinician within ten seconds. It never tries to give clinical advice.</div>
+      </details>
+      <details class="q rv">
+        <summary>Do we have to change phone provider?<span class="ic"></span></summary>
+        <div class="a">No. You forward your existing line on the conditions you pick &mdash; after hours only, after four rings, or every call. Your number, your carrier, your bill. Forwarding takes about ten minutes and we do it with you on a screen share.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ── cta ────────────────────────────────────────────── -->
+<section id="book" style="padding-bottom:0">
+  <div class="shell">
+    <div class="cta rv">
+      <svg class="mark" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-tooth-plain"/></svg>
+      <h2 class="h2">Stop paying for calls you never answer</h2>
+      <p class="lead">Twenty minutes, your real numbers, and a recording of Chairside answering a call from your own practice line.</p>
+      <a class="btn btn-primary" href="#book">Book a 20 minute demo</a>
+      <p class="small" style="color:var(--ink-40);margin-top:16px">No card, no contract, and we will tell you if you do not need us.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── footer ─────────────────────────────────────────── -->
+<footer>
+  <div class="shell">
+    <div class="foot-top rv">
+      <div>
+        <h3 class="h3">The Monday Chair</h3>
+        <p>Every Monday morning, three things that changed how a practice answers its phone. Written by a former practice manager, read in four minutes.</p>
+      </div>
+      <div>
+        <form class="sub-form" id="subform" novalidate>
+          <input type="email" id="subemail" placeholder="Email address" aria-label="Email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div class="sub-note">
+          <span class="faces">
+            <img src="img/avatar-5.jpg" alt=""><img src="img/avatar-1.jpg" alt=""><img src="img/avatar-3.jpg" alt=""><img src="img/avatar-4.jpg" alt="">
+          </span>
+          <p id="subnote">Read by 4,180 practice owners and office managers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-cols rv">
+      <div class="about">
+        <a class="brand" href="#top">
+          <svg viewBox="0 0 256 256" aria-hidden="true" style="color:var(--btn)"><use href="#i-tooth-plain"/></svg> Chairside
+        </a>
+        <p>An AI receptionist for dental practices. Answers the phone, books the chair, writes the note.</p>
+      </div>
+      <div><h5>Product</h5><ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#calls">Call examples</a></li>
+        <li><a href="#integrations">Integrations</a></li>
+        <li><a href="#how">How it works</a></li>
+      </ul></div>
+      <div><h5>Practice</h5><ul>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#faq">Pricing &amp; FAQ</a></li>
+        <li><a href="#book">Book a demo</a></li>
+        <li><a href="#top">Log in</a></li>
+      </ul></div>
+      <div><h5>Contact</h5><ul>
+        <li><a href="tel:+18005550142">+1 800 555 0142</a></li>
+        <li><a href="mailto:hello@chairside.example">hello@chairside.example</a></li>
+        <li><a href="#top">Status</a></li>
+        <li><a href="#top">Privacy</a></li>
+      </ul></div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>&copy; <span id="yr">2026</span> Chairside. A structure study &mdash; fictional brand, not a real service.</span>
+      <span>Built after <a href="https://www.dentai.ai" rel="noreferrer noopener" target="_blank">dentai.ai</a></span>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ── year ───────────────────────────────────────────── */
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+/* ── mobile menu ────────────────────────────────────── */
+var burger = document.getElementById("burger"), menu = document.getElementById("mobilemenu");
+burger.addEventListener("click", function(){
+  var open = menu.classList.toggle("open");
+  burger.setAttribute("aria-expanded", open ? "true" : "false");
+});
+menu.addEventListener("click", function(e){
+  if (e.target.tagName === "A"){ menu.classList.remove("open"); burger.setAttribute("aria-expanded","false"); }
+});
+document.addEventListener("click", function(e){
+  if (!menu.contains(e.target) && !burger.contains(e.target)) {
+    menu.classList.remove("open"); burger.setAttribute("aria-expanded","false");
+  }
+});
+
+/* ── nav hide on scroll down ────────────────────────── */
+var navwrap = document.getElementById("navwrap"), lastY = 0;
+addEventListener("scroll", function(){
+  var y = scrollY;
+  if (y > 220 && y > lastY && !menu.classList.contains("open")) navwrap.style.transform = "translateY(-130%)";
+  else navwrap.style.transform = "";
+  lastY = y;
+}, {passive:true});
+
+/* ── reveal on scroll ───────────────────────────────── */
+var rv = [].slice.call(document.querySelectorAll(".rv"));
+if (reduce || !("IntersectionObserver" in window)) {
+  rv.forEach(function(el){ el.classList.add("in"); });
+} else {
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, {rootMargin:"0px 0px -8% 0px", threshold:0.06});
+  rv.forEach(function(el, i){ el.style.transitionDelay = (Math.min(i,3) * 60) + "ms"; io.observe(el); });
+
+  /* A jump — a #hash link, a restored scroll position, find-in-page — can land
+     past an element without the observer ever crossing its threshold, which
+     leaves it invisible for good. Sweep whatever is on screen after a jump. */
+  var sweep = function(){
+    rv.forEach(function(el){
+      if (el.classList.contains("in")) return;
+      var r = el.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0){
+        el.style.transitionDelay = "0ms"; el.classList.add("in"); io.unobserve(el);
+      }
+    });
+  };
+  addEventListener("hashchange", function(){ setTimeout(sweep, 420); });
+  addEventListener("pageshow", function(){ setTimeout(sweep, 700); });
+  addEventListener("load", function(){ setTimeout(sweep, 900); });
+}
+
+/* ── live clock (assistance card) ───────────────────── */
+var ch = document.getElementById("ch"), cm = document.getElementById("cm"), cs = document.getElementById("cs");
+var clockBox = document.getElementById("clock"), clockOn = true, clockTimer = null;
+function tickClock(){
+  var d = new Date(), s = d.getSeconds(), m = d.getMinutes(), h = d.getHours() % 12;
+  cs.style.transform = "rotate(" + (s * 6) + "deg)";
+  cm.style.transform = "rotate(" + (m * 6 + s * 0.1) + "deg)";
+  ch.style.transform = "rotate(" + (h * 30 + m * 0.5) + "deg)";
+}
+tickClock();
+if (!reduce){
+  clockTimer = setInterval(function(){ if (clockOn) tickClock(); }, 1000);
+  if ("IntersectionObserver" in window){
+    new IntersectionObserver(function(e){ clockOn = e[0].isIntersecting; }).observe(clockBox);
+  }
+}
+
+/* ── waveform ───────────────────────────────────────── */
+var wave = document.getElementById("wave"), BARS = 84, bars = [];
+(function buildWave(){
+  var seed = 7;
+  function rnd(){ seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }
+  for (var i = 0; i < BARS; i++){
+    var env = Math.sin((i / BARS) * Math.PI);            /* fade at both ends */
+    var burst = 0.45 + 0.55 * Math.abs(Math.sin(i * 0.42));
+    var h = 6 + Math.round(env * burst * rnd() * 34) + 3;
+    var b = document.createElement("i");
+    b.style.height = h + "px";
+    wave.appendChild(b); bars.push(b);
+  }
+})();
+
+/* ── call scenarios ─────────────────────────────────── */
+var SCENARIOS = [
+  { face:"img/avatar-6.jpg", name:"Marco Reyes", meta:"Patient · Portland, OR",
+    t1:"12:00 PM", t2:"12:01 PM", dur:"1:52",
+    body:"Hi, I’d like to book a cleaning for the afternoon of Wednesday the 12th, around five if you have it. If not I’m flexible that week, so anything close to that works.",
+    out:"Outcome — booked 12 Feb, 5:00pm, written to the chart in 4 seconds." },
+  { face:"img/avatar-1.jpg", name:"Dana Okafor", meta:"Patient · Austin, TX",
+    t1:"8:42 AM", t2:"8:43 AM", dur:"1:14",
+    body:"I have a crown fitting on Thursday at ten but my shift changed. Can you push it to the following week? Mornings are better for me now.",
+    out:"Outcome — moved to 19 Feb, 9:15am. Old slot released and offered to the waitlist." },
+  { face:"img/avatar-4.jpg", name:"Sanjay Iyer", meta:"Patient · Jersey City, NJ",
+    t1:"6:15 PM", t2:"6:16 PM", dur:"0:48",
+    body:"Something’s come up and I need to cancel tomorrow’s check-up. Sorry about the short notice — do I owe anything for that?",
+    out:"Outcome — cancelled, fee policy read back, slot returned to the book." },
+  { face:"img/avatar-2.jpg", name:"Alan Whitmore", meta:"Patient · Boise, ID",
+    t1:"11:58 PM", t2:"11:58 PM", dur:"0:39",
+    body:"My son knocked his front tooth out playing hockey about twenty minutes ago. There’s still bleeding. What do we do right now?",
+    out:"Outcome — emergency script read, on-call clinician paged at 11:58 PM. No booking attempted." },
+  { face:"img/avatar-3.jpg", name:"Wen Li", meta:"Patient · Seattle, WA",
+    t1:"2:07 PM", t2:"2:07 PM", dur:"1:05",
+    body:"I got a statement in the post for two hundred and forty dollars but I thought my insurance covered the x-rays. Can you explain the difference?",
+    out:"Outcome — balance read from the ledger, itemised note sent to the billing desk." }
+];
+var list = document.getElementById("scenlist");
+var el = {
+  face: document.getElementById("cv-face"), name: document.getElementById("cv-name"),
+  meta: document.getElementById("cv-meta"), body: document.getElementById("cv-body"),
+  t1: document.getElementById("cv-t1"), t2: document.getElementById("cv-t2"),
+  dur: document.getElementById("cv-dur"), out: document.getElementById("cv-out"),
+  cur: document.getElementById("cv-cur")
+};
+function toSec(t){ var p = t.split(":"); return (+p[0]) * 60 + (+p[1]); }
+function fmt(s){ s = Math.max(0, Math.round(s)); return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0"); }
+var current = 0;
+function paint(i){
+  var s = SCENARIOS[i]; current = i;
+  el.face.src = s.face; el.name.textContent = s.name; el.meta.textContent = s.meta;
+  el.body.textContent = s.body; el.t1.textContent = s.t1; el.t2.textContent = s.t2;
+  el.dur.textContent = "/" + s.dur; el.out.textContent = s.out;
+  stop(); setProgress(0);
+  [].forEach.call(list.children, function(li, n){ li.classList.toggle("on", n === i); });
+}
+list.addEventListener("click", function(e){
+  var b = e.target.closest("button[data-i]"); if (!b) return;
+  paint(+b.getAttribute("data-i"));
+});
+
+/* ── fake playback ──────────────────────────────────── */
+var playBtn = document.getElementById("playbtn"), raf = null, t0 = 0, playing = false;
+function setProgress(p){
+  var lit = Math.round(p * BARS);
+  for (var i = 0; i < BARS; i++) bars[i].classList.toggle("lit", i < lit);
+  el.cur.textContent = fmt(p * toSec(SCENARIOS[current].dur));
+}
+function icon(name){
+  playBtn.innerHTML = '<svg viewBox="0 0 256 256"><use href="#i-' + name + '"/></svg>';
+}
+function stop(){
+  playing = false; if (raf) cancelAnimationFrame(raf); raf = null;
+  icon("play"); playBtn.setAttribute("aria-label","Play the recording");
+}
+function frame(now){
+  var total = toSec(SCENARIOS[current].dur) * 1000 / 12;   /* 12x speed preview */
+  var p = (now - t0) / total;
+  if (p >= 1){ setProgress(1); stop(); return; }
+  setProgress(p); raf = requestAnimationFrame(frame);
+}
+playBtn.addEventListener("click", function(){
+  if (playing){ stop(); return; }
+  if (reduce){ setProgress(1); return; }
+  playing = true; icon("x"); playBtn.setAttribute("aria-label","Stop the recording");
+  playBtn.querySelector("svg").style.width = "15px";
+  t0 = performance.now(); raf = requestAnimationFrame(frame);
+});
+setProgress(0);
+
+/* ── integrations orbit ─────────────────────────────── */
+var ORB = [
+  /* inner ring */
+  { n:"Opaline",    s:"Cloud",  r:0.19, a:-58,  hi:false },
+  { n:"Quadrant",   s:"PMS",    r:0.19, a:133,  hi:false },
+  /* middle ring */
+  { n:"Chartwell",  s:"PMS",    r:0.33, a:-143, hi:false },
+  { n:"ArchDesk",   s:"Desktop",r:0.33, a:46,   hi:false },
+  /* outer ring */
+  { n:"Riva PMS",   s:"PMS",    r:0.47, a:-108, hi:true  },
+  { n:"Molar OS",   s:"Cloud",  r:0.47, a:-50,  hi:false },
+  { n:"Dentiq",     s:"PMS",    r:0.47, a:-176, hi:false },
+  { n:"Sextant",    s:"Imaging",r:0.47, a:16,   hi:true  },
+  { n:"Periosoft",  s:"Cloud",  r:0.47, a:117,  hi:false }
+];
+var orbit = document.getElementById("orbit");
+ORB.forEach(function(o, i){
+  var d = document.createElement("div");
+  d.className = "node" + (o.hi ? " hi" : "");
+  var rad = o.a * Math.PI / 180;
+  d.style.left = (50 + Math.cos(rad) * o.r * 100) + "%";
+  d.style.top  = (50 + Math.sin(rad) * o.r * 100) + "%";
+  d.style.transform = "translate(-50%,-50%)";
+  d.innerHTML = "<span>" + o.n + "<small>" + o.s + "</small></span>";
+  if (!reduce){
+    d.style.animation = "float" + (i % 3) + " " + (7 + (i % 4)) + "s ease-in-out " + (i * 0.4) + "s infinite";
+  }
+  orbit.appendChild(d);
+});
+if (!reduce){
+  var st = document.createElement("style");
+  st.textContent =
+    "@keyframes float0{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,calc(-50% - 7px))}}" +
+    "@keyframes float1{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,calc(-50% + 8px))}}" +
+    "@keyframes float2{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(calc(-50% + 6px),calc(-50% - 5px))}}";
+  document.head.appendChild(st);
+}
+
+/* ── newsletter (local only) ────────────────────────── */
+var form = document.getElementById("subform"), note = document.getElementById("subnote");
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  var v = document.getElementById("subemail").value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ note.textContent = "That email does not look right — check it and try again."; return; }
+  form.querySelector("button").textContent = "Subscribed";
+  note.textContent = "You’re on the list. First issue lands Monday at 7am your time.";
+});
+
+/* ── FAQ accordion: one open at a time ──────────────── */
+var qs = [].slice.call(document.querySelectorAll(".faq details"));
+qs.forEach(function(d){
+  d.addEventListener("toggle", function(){
+    if (d.open) qs.forEach(function(o){ if (o !== d) o.open = false; });
+  });
+});
+})();
+</script>
+</body>
+</html>
