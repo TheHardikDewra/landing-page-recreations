@@ -15,10 +15,10 @@ The hub at `/` links all of them.
 ## Rules the pages follow
 
 - Section order and layout roles match the reference 1:1. Nothing added, nothing dropped.
-- Every word, colour, and brand is original. No copy is reused from the references.
+- Every word and brand is original. No copy is reused from the references. Colour is original on every page except `/tessera`, which currently mirrors Kintsugi's colour system as a baseline before diverging.
 - Solid flat colours only. No gradients, no glow effects (the reference sites' gradient panels became flat solids).
 - One self-contained `index.html` per page: inline CSS and JS, inline SVG icons, no libraries.
-- Type: Haffer (local) with Geist and Inter as web fallbacks; Newsreader and Instrument Serif where the reference uses a serif; Geist Mono for data labels on Tessera.
+- Type: Haffer (local) with Geist and Inter as web fallbacks; Newsreader and Instrument Serif where the reference uses a serif. `/tessera` runs DM Sans + Switzer to match its reference.
 - Responsive to 375px. Every interactive element (carousels, tabs, accordions, rotating words, marquee) actually works.
 
 ## Imagery
