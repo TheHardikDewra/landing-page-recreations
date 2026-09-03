@@ -9,7 +9,8 @@ Landing pages rebuilt section-for-section from sites whose structure I admire. E
 | [`/maya-iyer`](maya-iyer/index.html) | arthurbrooks.com | Dr. Maya Iyer - a sleep scientist's personal brand. Hero carousel, testimonial carousel, quiz band, crisis-to-solution arc, podcast, books, speaking, partnerships, membership, signup footer. |
 | [`/harbor`](harbor/index.html) | calendly.com | Harbor - a client-ops SaaS for freelancers. Product tabs, four-step process, four accordion feature blocks, customer stories, integrations, get-started, marquee, footer. |
 | [`/tessera`](tessera/index.html) | trykintsugi.com | Tessera - license and permit compliance for multi-location operators. Hero window stack, logo band, filing table, three pillars, dark CTA bands, AI grid, switchable coverage map, support block, six differentiators, two review marquees, product carousel, 3D story coverflow, closing, footer. |
-| [`/chairside`](chairside/index.html) | dentai.ai | Chairside - an AI receptionist for dental practices. Tilted product dashboard, PMS logo grid, four feature cards, five switchable call scenarios with a scrubbing waveform player, nine-system integration orbit, four-step onboarding, three security seals, FAQ, CTA band, newsletter footer. |
+| [`/chairside`](chairside/index.html) | dentai.ai (Figma prototype) | Chairside - an AI receptionist for dental practices. Tilted product dashboard, PMS logo grid, four feature cards, five switchable call scenarios with a scrubbing waveform player, nine-system integration orbit, four-step onboarding, three security seals, FAQ, CTA band, newsletter footer. |
+| [`/chairside-classic`](chairside-classic/index.html) | dentai.ai (shipped site) | Chairside Classic - the same brand on the structure the live site actually ships. Centred hero over a flat blue field, live conversation panel, ten-system PMS grid, four hairline capability quadrants, self-advancing four-step walkthrough, FAQ, full-bleed closing band, oversized wordmark footer. |
 
 The hub at `/` links all of them.
 
@@ -52,6 +53,7 @@ maya-iyer/          page + img/hero-1..5, testimonial, portrait, podcast, speaki
 harbor/             page + img/story-1..5, marquee-1..4
 tessera/            page + img/story-1..6
 chairside/          page + img/avatar-1..6
+chairside-classic/  page (shares /chairside/img)
 vercel.json         cleanUrls
 ```
 
