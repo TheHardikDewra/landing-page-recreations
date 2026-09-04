@@ -122,48 +122,11 @@ h1,h2,h3,h4,p{margin:0}
 .hero .lead{margin-top:22px;max-width:530px}
 .hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
 .hero-note{margin-top:16px;font-size:13.5px;color:var(--ink-40)}
-.hero-stage{margin-top:22px;position:relative;height:clamp(270px,26vw,375px);z-index:1}
-.hero-stage .plate{position:absolute;left:0;top:0;width:min(1500px,132%);
-  transform:perspective(2200px) rotateX(46deg) rotateZ(-22deg);
-  transform-origin:0 0;filter:drop-shadow(0 40px 60px rgba(36,76,104,.18))}
-
-/* dashboard mockup */
-.dash{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;min-height:520px}
-.dash-side{width:212px;flex:none;border-right:1px solid var(--line);padding:18px 14px;background:#FCFDFE}
-.dash-side .brand{font-size:17px;margin-bottom:22px;padding-left:6px}
-.dash-side .grp{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40);
-  padding:0 8px;margin:16px 0 8px}
-.dash-side .item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;
-  font-size:13.5px;color:var(--ink-60)}
-.dash-side .item svg{width:16px;height:16px}
-.dash-side .item.on{background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:500}
-.dash-main{flex:1;min-width:0;display:flex;flex-direction:column}
-.dash-top{height:56px;border-bottom:1px solid var(--line);display:flex;align-items:center;
-  gap:10px;padding:0 18px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-60)}
-.dash-top .me{margin-left:auto;display:flex;align-items:center;gap:8px;padding:5px 10px 5px 5px;
-  border:1px solid var(--line);border-radius:999px;text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink)}
-.dash-top .me img{width:24px;height:24px;border-radius:50%}
-.dash-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:18px}
-.stat{border:1px solid var(--line);border-radius:14px;padding:15px;background:#fff}
-.stat .k{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40)}
-.stat .v{display:flex;align-items:baseline;gap:8px;margin-top:5px}
-.stat .v b{font-size:26px;font-weight:600;letter-spacing:-.03em}
-.chip{font-size:11px;font-weight:500;padding:2px 7px;border-radius:999px}
-.chip.up{background:#E7F6EC;color:#2C7A48}
-.chip.dn{background:#FDECEC;color:#B3413F}
-.stat p{font-size:12px;color:var(--ink-40);margin-top:6px;line-height:1.45}
-.spark-line{margin-top:10px;height:38px}
-.dash-table{margin:0 18px 18px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.dash-table .thead,.dash-table .trow{display:grid;grid-template-columns:1.2fr 1.3fr .8fr 1.4fr 1.1fr;
-  gap:10px;padding:11px 16px;align-items:center}
-.dash-table .thead{background:#FCFDFE;border-bottom:1px solid var(--line);
-  font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40)}
-.dash-table .trow{border-bottom:1px solid var(--line);font-size:13px}
-.dash-table .trow:last-child{border-bottom:0}
-.badge{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;
-  font-size:12px;font-weight:500;background:var(--btn);color:#fff}
-.badge.grey{background:var(--ink-08);color:var(--ink-60)}
-.muted{color:var(--ink-40)}
+.hero-stage{margin-top:26px;position:relative;height:clamp(250px,33vw,470px);z-index:1}
+.hero-stage .plate{position:absolute;left:0;top:0;width:min(1560px,138%);
+  transform:perspective(2600px) rotateX(26deg) rotateZ(-5deg);
+  transform-origin:0 0;filter:drop-shadow(0 40px 70px rgba(36,76,104,.20))}
+.hero-stage .plate img{width:100%;height:auto;display:block;border-radius:22px}
 
 /* ── trust row ──────────────────────────────────────────── */
 .trust{padding-top:64px}
@@ -431,8 +394,8 @@ footer{padding-top:96px;padding-bottom:40px}
   .notes .n3{width:min(280px,100%)}
   .shell{padding-inline:18px}
   .hero{padding-top:118px}
-  .hero-stage{height:300px;margin-top:40px}
-  .hero-stage .plate{width:200%;transform:perspective(1600px) rotateX(48deg) rotateZ(-20deg)}
+  .hero-stage{height:250px;margin-top:30px}
+  .hero-stage .plate{width:215%;transform:perspective(2000px) rotateX(22deg) rotateZ(-4deg)}
   .spark{width:44px;height:44px;border-radius:12px}
   .spark svg{width:22px;height:22px}
   .steps{grid-template-columns:1fr}
@@ -529,52 +492,7 @@ footer{padding-top:96px;padding-bottom:40px}
   <div class="shell">
     <div class="hero-stage">
       <div class="plate">
-        <div class="dash">
-          <aside class="dash-side">
-            <span class="brand"><svg viewBox="0 0 256 256" aria-hidden="true" style="color:var(--btn)"><use href="#i-tooth-plain"/></svg> Chairside</span>
-            <div class="grp">Main</div>
-            <div class="item on"><svg viewBox="0 0 256 256"><use href="#i-grid"/></svg> Dashboard</div>
-            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-chart"/></svg> Analytics</div>
-            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-phone"/></svg> Call log</div>
-            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-cal"/></svg> Schedule</div>
-            <div class="grp">Practice</div>
-            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-shield"/></svg> Permissions</div>
-            <div class="item"><svg viewBox="0 0 256 256"><use href="#i-gear"/></svg> Settings</div>
-          </aside>
-          <div class="dash-main">
-            <div class="dash-top">
-              <svg viewBox="0 0 256 256" style="width:15px;height:15px"><use href="#i-grid"/></svg> Dashboard
-              <span class="me"><img src="/chairside/img/avatar-2.jpg" alt="">Dr. Whitfield</span>
-            </div>
-            <div class="dash-cards">
-              <div class="stat">
-                <div class="k">Calls answered</div>
-                <div class="v"><b class="tnum">1,284</b><span class="chip up">+12%</span></div>
-                <p>Every ring picked up inside 2 seconds this month.</p>
-                <svg class="spark-line" viewBox="0 0 200 38" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#6AA3CC" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="0,30 22,26 44,29 66,18 88,22 110,12 132,16 154,7 176,11 200,4"/></svg>
-              </div>
-              <div class="stat">
-                <div class="k">Booked from calls</div>
-                <div class="v"><b class="tnum">412</b><span class="chip up">+9%</span></div>
-                <p>Appointments written back to your software.</p>
-                <svg class="spark-line" viewBox="0 0 200 38" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#6AA3CC" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="0,26 22,28 44,20 66,24 88,15 110,19 132,10 154,13 176,6 200,8"/></svg>
-              </div>
-              <div class="stat">
-                <div class="k">Missed calls</div>
-                <div class="v"><b class="tnum">6</b><span class="chip dn">&minus;94%</span></div>
-                <p>Down from 98 in the month before you switched.</p>
-                <svg class="spark-line" viewBox="0 0 200 38" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#C7D6E1" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="0,6 22,9 44,7 66,15 88,13 110,22 132,20 154,28 176,26 200,32"/></svg>
-              </div>
-            </div>
-            <div class="dash-table">
-              <div class="thead"><span>Caller</span><span>Outcome</span><span>Status</span><span>Location</span><span>Phone</span></div>
-              <div class="trow"><span>James Brown</span><span>19 Oct, 4:30&ndash;4:45pm</span><span><i class="badge">Booked</i></span><span class="muted">Northgate Dental</span><span class="muted tnum">+1 234 5678 90</span></div>
-              <div class="trow"><span>Priya Raman</span><span>19 Oct, 5:10&ndash;5:40pm</span><span><i class="badge">Booked</i></span><span class="muted">Northgate Dental</span><span class="muted tnum">+1 234 5678 44</span></div>
-              <div class="trow"><span>Alan Whitmore</span><span>Message for Dr. Kim</span><span><i class="badge grey">Note</i></span><span class="muted">Rivermark</span><span class="muted tnum">+1 234 5678 12</span></div>
-              <div class="trow"><span>Sofia Delgado</span><span>20 Oct, 9:00&ndash;9:30am</span><span><i class="badge">Booked</i></span><span class="muted">Rivermark</span><span class="muted tnum">+1 234 5678 07</span></div>
-            </div>
-          </div>
-        </div>
+        <img src="/chairside/img/dashboard.png" alt="Chairside dashboard: calls answered, bookings and the call log" width="1600" height="700" decoding="async">
       </div>
     </div>
   </div>
